@@ -1,0 +1,139 @@
+<nb-card>
+  <nb-card-header>
+    Quản lí thể loại
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="horizontal-form" autocomplete="off" style="padding: 0 15px; margin-top: 15px;">
+      <div class="m-form m-form--label-align-right">
+        <div class="row align-items-center m--margin-bottom-10">
+          <div class="col-xl-12">
+            <div class="form-group m-form__group align-items-center">
+              <div class="input-group">
+
+                <b style="display: flex; align-items: center; margin-left: -20px;"></b>
+                <input nbInput class="search-input" style="margin-left: 10px;width: 100%;" type="text" autoFocus
+                  placeholder="ID hoặc tên loại nhạc..." name="Keyword" [(ngModel)]="Keyword">
+                <span style="width: 10px"></span>
+
+                <span style="width: 10px"></span>
+                <span class="input-group-btn">
+                  <button (click)="onSearch()" class="btn btn-outline-info">Tìm <i class="fa fa-search"></i></button>
+                  <button (click)="onAddNew(dialogAddsongtype)" style="margin-left: 20px;" class="btn btn-outline-info">Tạo
+                    mới <i class="fa fa-plus"></i></button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng2-smart-table #tablesongtype class="table-song" [settings]="settings" [source]="source"
+      (userRowSelect)="onRowSelect($event)" (edit)="onOpenEdit($event,dialogEditsongtype)" (delete)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<ng-template #dialog let-data let-ref="dialogRef">
+  <div class="container col-md-12 row">
+    <div class="avatar-detail col-md-4">
+      <div class="thumbnail">
+        <img *ngIf="data.songtype.thumbnail===''||data.songtype.thumbnail===null"
+          src="https://www.loc.gov/static/images/original-format/songtypes.png" alt="cover" class="cover" />
+        <img *ngIf="data.songtype.thumbnail!==''&&data.songtype.thumbnail!==null" src="{{data.songtype.thumbnail}}"
+          alt="cover" class="cover" />
+      </div>
+      <nb-card class="infor">
+        <h4 class="title1">{{data.songtype.name}}</h4>
+        <div>Ngày tạo: {{data.songtype.dateCreate}}</div>
+        <textarea disabled>Mô tả: {{data.songtype.description}}</textarea>
+
+      </nb-card>
+
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template class="col-md-12" #dialogAddsongtype let-data let-ref="dialogRef">
+
+  <nb-card>
+    <h4 class="card-header">Tạo mới thể loại</h4>
+    <div class="card-body">
+      <form [formGroup]="addsongtypeForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="name">Tên thể loại</label>
+          <input type="name" formControlName="name" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">Tên không được bỏ trống</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Mô tả ngắn</label>
+          <textarea type="text" formControlName="description" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.description.errors }" required minlength="10"></textarea>
+          <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+
+            <div *ngIf="f.description.errors.required">
+              Mô tả không được bỏ trống
+            </div>
+            <div *ngIf="f.description.errors.minlength">
+              Mô tả phải trên 10 kí tự
+            </div>
+
+          </div>
+        </div>
+       
+        <button [disabled]="loading" class="btn btn-outline-info" style="margin-top: 10px;">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Tạo mới
+        </button>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+      </form>
+    </div>
+  </nb-card>
+</ng-template>
+
+
+<ng-template class="col-md-12" #dialogEditsongtype let-data let-ref="dialogRef">
+
+  <nb-card>
+    <h4 class="card-header">Sửa thể loại</h4>
+    <div class="card-body">
+      <form [formGroup]="editsongtypeForm" (ngSubmit)="onSubmitEdit()">
+
+        <div class="form-group">
+          <label for="name">Tên thể loại</label>
+          <input type="name" formControlName="nameEdit" class="form-control"
+            [ngClass]="{ 'is-invalid': editted && fedit.nameEdit.errors }" />
+          <div *ngIf="editted && fedit.nameEdit.errors" class="invalid-feedback">
+            <div *ngIf="fedit.nameEdit.errors.required">Tên không được bỏ trống</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Mô tả ngắn</label>
+          <textarea type="text" formControlName="descriptionEdit" class="form-control"
+            [ngClass]="{ 'is-invalid': editted && fedit.descriptionEdit.errors }" required minlength="10"></textarea>
+          <div *ngIf="editted && fedit.descriptionEdit.errors" class="invalid-feedback">
+
+            <div *ngIf="fedit.descriptionEdit.errors.required">
+              Mô tả không được bỏ trống
+            </div>
+            <div *ngIf="fedit.descriptionEdit.errors.minlength">
+              Mô tả phải trên 10 kí tự
+            </div>
+
+          </div>
+        </div>
+       
+        <button [disabled]="loading" class="btn btn-outline-info" style="margin-top: 10px;">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Sửa
+        </button>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+      </form>
+    </div>
+  </nb-card>
+</ng-template>

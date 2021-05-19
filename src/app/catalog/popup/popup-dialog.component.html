@@ -1,0 +1,22 @@
+<nb-card>
+  <nb-card-header>
+   <div *ngIf="status!=200">
+    Lỗi
+   </div> 
+   <div *ngIf="status==200">
+    OK
+   </div> 
+  </nb-card-header>
+  <nb-card-body>
+    <div>
+      {{msg}}
+    </div>
+    <div *ngIf="status!=200">Mã lỗi: {{status}}</div>
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="btn btn-outline-info" (click)="dismiss()">Dismiss Dialog</button>
+  </nb-card-footer>
+</nb-card>
+
+
+

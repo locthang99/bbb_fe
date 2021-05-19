@@ -1,0 +1,44 @@
+
+<ng-template #detailplaylist let-data let-ref="dialogRef">
+  <div class="container col-md-12 row">
+    <div class="avatar-detail col-md-4">
+      <div class="thumbnail">
+        <img *ngIf="data.playlist.thumbnail===''||data.playlist.thumbnail===null" src="https://www.loc.gov/static/images/original-format/playlists.png" alt="cover" class="cover" />
+        <img *ngIf="data.playlist.thumbnail!==''&&data.playlist.thumbnail!==null" src="{{data.playlist.thumbnail}}" alt="cover" class="cover" />
+      </div>
+      <nb-card class="infor">
+        <h4 class="title1">{{data.playlist.name}}</h4>
+        <div class="title2">{{data.playlist.owner.nameOwner}}</div>
+        <div class="icon-">
+          <i class="fa fa-heart likes"> {{data.playlist.totalLike}}</i>
+          <i class="fa fa-headphones likes"> {{data.playlist.totalListen}}</i>
+        </div>
+        <div>Số bài hát: {{data.playlist.totalSong}}</div>
+        <div>Ngày tạo: {{data.playlist.dateCreate}}</div>
+        <p>Mô tả: {{data.playlist.description}}</p>
+
+      </nb-card>
+
+    </div>
+    <nb-card class="list-song col-md-8">
+
+      <h5>Danh sách bài hát</h5>
+      <div class="input-group" style="margin-bottom: 10px;">
+        <input nbInput class="search-input" style="margin-right: 10px;width: 100%;" type="text" autoFocus
+          placeholder="Nhập ID bài hát muốn thêm vào playlist..." name="Keyword" (change)="IdSongAddChange($event)">
+        <button (click)="onAddSongToPlaylist()" class="btn btn-primary">Thêm <i class="fa fa-add"></i></button>
+      </div>
+
+      <ng2-smart-table class="list-detail-song" [settings]="settingListSong" [source]="sourceListSong"
+        (deleteConfirm)="onDeleteSongConfirm($event)">
+      </ng2-smart-table>
+    </nb-card>
+  </div>
+</ng-template>
+
+
+<ng-template #lol let-data let-ref="dialogRef">
+  <div class="container col-md-12 row">
+   <div>lolllllllllllllllllllllllll</div>
+  </div>
+</ng-template>
