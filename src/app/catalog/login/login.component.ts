@@ -1,10 +1,12 @@
-﻿import { Component, OnInit } from "@angular/core";
+﻿import { Component, OnInit,Injectable } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { first } from "rxjs/operators";
 
-import { UsersClient } from "app/service/Account/AccountService";
-import { UserLoginRequest } from "app/service/Account/AcountDto";
+
+import { AdminHttpClient } from "app/services/Auth/AuthService";
+import { LoginCommand } from "app/services/Auth/AuthDTOs";
+
 @Component({
   templateUrl: "login.component.html",
   styleUrls: [
@@ -23,13 +25,13 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: UsersClient
+    private authService: AdminHttpClient
   ) {
-    this.authenticationService.getCurrentUser().subscribe((res: any) => {
-      if (res.status == 200) {
-        if (res.data.data.role == "admin") this.router.navigate(["pages"]);
-      } 
-    });
+    // this.authenticationService.getCurrentUser().subscribe((res: any) => {
+    //   if (res.status == 200) {
+    //     if (res.data.data.role == "admin") this.router.navigate(["pages"]);
+    //   } 
+    // });
     // redirect to home if already logged in
     // if (this.authenticationService.currentUserValue) {
     //     this.router.navigate(['/']);
@@ -50,60 +52,37 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     }
-
     this.loading = true;
-    let loginRq = new UserLoginRequest({
-      user: this.f.username.value,
+    let loginRq = new LoginCommand()
+    loginRq.init({
+      username: this.f.username.value,
       password: this.f.password.value,
       rememberMe: true,
     });
-    this.authenticationService.login(loginRq).subscribe((res: any) => {
-      //console.log(res)
+    this.authService.login(loginRq).then((res: any) => {
+      console.log(res)
       
-      if (res.status == "200") {
-        localStorage.setItem("token", res.data.data.token);
-        this.authenticationService.getCurrentUser().subscribe((res:any)=>{
-          if(res.data.data.role=='admin')
-        {      
-          this.error=null    
-          const returnUrl =
-            this.route.snapshot.queryParams["returnUrl"] || "pages";
-          console.log(returnUrl);
-          this.router.navigate([returnUrl]).then(()=>{
-            this.loading = false;
-          });
-        }
+      if (res.code == "200") {
+        localStorage.setItem("token", res.data.token);
+        this.error=null    
+        const returnUrl =
+          this.route.snapshot.queryParams["returnUrl"] || "pages";
+        console.log(returnUrl);
+        this.router.navigate([returnUrl]).then(()=>{
+          this.loading = false;
+        });
+      }
         else
         {
           this.error = "Đăng nhập với tài khoản Admin";
-        }
-        })
-        
-        
-        
-        // console.log("Login ok +"+data.data.data.token)
-      } else {
-        localStorage.setItem("token", "");
-        this.error = "Sai tài khoản hoặc mật khẩu";
-        this.loading = false;
-      }
+        } 
+
+        // console.log("Login ok +"+data.data.data.token) 
     });
-    // .pipe(first())
-    // .subscribe({
-    //     next: () => {
-    //         // get return url from route parameters or default to '/'
-    //         const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    //         this.router.navigate([returnUrl]);
-    //     },
-    //     error: error => {
-    //         this.error = error;
-    //         this.loading = false;
-    //     }
-    // });
+    this.loading = false;
   }
 }
