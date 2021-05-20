@@ -9,6 +9,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {MatTableModule} from "@angular/material/table"
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ECommerceModule,
     MiscellaneousModule,
     MatTableModule,
-    MatTableModule
+    MatPaginatorModule,
+    MatIconModule
   ],
   declarations: [
     PagesComponent,

@@ -1,16 +1,12 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
+import { Component, OnInit, TemplateRef,ViewChild } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
-import { SongsClient } from "app/service/Song/SongService";
 import { SongHttpClient } from "app/services/song/song-service";
-import { CommentCommand } from "app/services/song/song-dto";
 import { NbDialogService } from "@nebular/theme";
-import { SongDialogComponent } from "./showcase-dialog/song-dialog.component";
 import { Common,parseDatetime } from "../common/conmmon";
 import { SortParameter } from "app/services/service-base";
 import {MatTableDataSource} from "@angular/material/table"
-import { ViewChild } from '@angular/core';
+import {MatMenuTrigger} from "@angular/material/menu"
 import {
-  PageEvent,
   MatPaginator,
 } from '@angular/material/paginator';
 @Component({
@@ -20,6 +16,12 @@ import {
 })
 export class SongComponent implements OnInit {
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+
+  someMethod() {
+    this.trigger.openMenu();
+  }
   public songs = new MatTableDataSource();
   source: LocalDataSource = new LocalDataSource();
   id: number;
@@ -35,7 +37,6 @@ export class SongComponent implements OnInit {
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
-  pageEvent: PageEvent;
   constructor(
     public songService: SongHttpClient,
     private dialogService: NbDialogService,
@@ -44,21 +45,20 @@ export class SongComponent implements OnInit {
     this.id = 1;
     this.pagsize = 20;
     this.sortParameter = new SortParameter()
-
+    this.sortParameter.init({index:2,pageSize:5})
     this.load();
 
   }
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-    }
-  }
   ngOnInit(): void {}
+  ngAfterViewInit() {
+    //this.songs.paginator = this.paginator;
+  }
   load() {
-    this.sortParameter.init({index:10})
     this.songService.get(this.sortParameter).then((res: any) => {
       this.files = [];
       this.songs.data =res.data
+      this.paginator.length = res.totalItem
+      this.paginator.pageIndex = res.index
       this.source.load(res.data);
     });
   }

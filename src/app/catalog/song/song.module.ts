@@ -8,7 +8,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   imports: [
     NbCardModule,
-    NbIconModule,
+    NbIconModule, 
     NbInputModule,
     ThemeModule,
     Ng2SmartTableModule,
