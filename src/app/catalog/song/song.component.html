@@ -4,7 +4,8 @@
   </nb-card-header>
 
   <nb-card-body>
-    <div class="horizontal-form" autocomplete="off" style="padding: 0 15px; margin-top: 15px;">
+    
+    <!-- <div class="horizontal-form" autocomplete="off" style="padding: 0 15px; margin-top: 15px;">
       <div class="m-form m-form--label-align-right">
         <div class="row align-items-center m--margin-bottom-10">
           <div class="col-xl-12">
@@ -25,10 +26,34 @@
           </div>
         </div>
       </div>
-    </div>
-    <ng2-smart-table class="table-song" [settings]="settings" [source]="source"
+    </div> -->
+
+    <!-- <ng2-smart-table class="table-song" [settings]="settings" [source]="source"
       (userRowSelect)="onRowSelect($event);openWithoutBackdropClick(dialog)" (deleteConfirm)="onDeleteConfirm($event)">
-    </ng2-smart-table>
+    </ng2-smart-table> -->
+    <mat-table [dataSource]="score">
+      <!-- User name Definition -->
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef> User name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.username}} </mat-cell>
+      </ng-container>
+    
+      <!-- Age Definition -->
+      <ng-container matColumnDef="age">
+        <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.age}} </mat-cell>
+      </ng-container>
+    
+      <!-- Title Definition -->
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+      </ng-container>
+    
+      <!-- Header and Row Declarations -->
+      <mat-header-row *matHeaderRowDef="['username', 'age', 'title']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['username', 'age', 'title']"></mat-row>
+    </mat-table>
   </nb-card-body>
 </nb-card>
 

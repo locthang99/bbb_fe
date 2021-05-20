@@ -20,8 +20,8 @@ export const routes: Routes = [
   {
     path: 'auth',component: LoginComponent,pathMatch:'full'
   },
-  { path: '', redirectTo: 'auth',pathMatch:'full'},
-  { path: '**', redirectTo: 'auth' ,pathMatch:'full'},
+  { path: '', redirectTo: 'pages',pathMatch:'full'},
+  { path: '**', redirectTo: 'pages' ,pathMatch:'full'},
 ];
 
 const config: ExtraOptions = {

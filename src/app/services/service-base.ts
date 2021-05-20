@@ -3,7 +3,7 @@ import { Observable, throwError as _observableThrow, of as _observableOf } from 
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
-export const HOST_API = 'https://localhost:5001'
+export const HOST_API = 'http://103.92.29.98'
 
 export class SwaggerResponse<TResult> {
     status: number;
@@ -16,6 +16,43 @@ export class SwaggerResponse<TResult> {
         this.headers = headers;
         this.result = result;
     }
+}
+
+export class SortParameter{
+    index: number | undefined;
+    pageSize: number | undefined;
+    sortBy: string | null | undefined;
+    sortASC: boolean | undefined;
+    // constructor (index:number,pageSize:number,sortBy:string,sortASC:boolean)
+    // {
+    //     this.index = index,
+    //     this.pageSize = pageSize,
+    //     this.sortBy = sortBy,
+    //     this.sortASC =sortASC
+    // }
+    init(_data?: any) {
+        if (_data) {
+            this.index = _data['index'],
+            this.pageSize = _data['pageSize'],
+            this.sortBy = _data['sortBy'],
+            this.sortASC =_data['sortASC']
+        }
+    }
+
+    // static fromJS(data: any): SortParameter {
+    //     data = typeof data === 'object' ? data : {};
+    //     let result = new SortParameter();
+    //     result.init(data);
+    //     return result;
+    // }
+
+    // toJSON(data?: any) {
+    //     data = typeof data === 'object' ? data : {};
+    //     data["objId"] = this.objId;
+    //     data["content"] = this.content;
+    //     return data; 
+    // }
+    
 }
 
 export interface FileParameter {

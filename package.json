@@ -1,33 +1,15 @@
 {
-  "name": "ngx-admin",
+  "name": "bbb-admin",
   "version": "6.0.0",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/akveo/ngx-admin.git"
-  },
-  "bugs": {
-    "url": "https://github.com/akveo/ngx-admin/issues"
-  },
   "scripts": {
     "ng": "ng",
-    "conventional-changelog": "conventional-changelog",
     "start": "ng serve",
-    "build": "ng build",
-    "build:prod": "npm run build -- --prod --aot",
+    "build": "ng build --prod",
     "test": "ng test",
-    "test:coverage": "rimraf coverage && npm run test -- --code-coverage",
     "lint": "ng lint",
-    "lint:fix": "ng lint ngx-admin-demo --fix",
-    "lint:styles": "stylelint ./src/**/*.scss",
-    "lint:ci": "npm run lint && npm run lint:styles",
-    "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "ng e2e",
-    "docs": "compodoc -p src/tsconfig.app.json -d docs",
-    "docs:serve": "compodoc -p src/tsconfig.app.json -d docs -s",
-    "prepush": "npm run lint:ci",
-    "release:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
-    "postinstall": "ngcc --properties es2015 es5 browser module main --first-only --create-ivy-entry-points --tsconfig \"./src/tsconfig.app.json\""
+    "server": "node backend/server.js"
   },
   "dependencies": {
     "@akveo/ng2-completer": "^9.0.1",
