@@ -3,9 +3,9 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { first } from "rxjs/operators";
 
-
-import { AdminHttpClient } from "app/services/Auth/AuthService";
-import { LoginCommand } from "app/services/Auth/AuthDTOs";
+import {Msg} from "../../../assets/message/message"
+import { AdminHttpClient } from "app/services/auth/auth-service";
+import { LoginCommand } from "app/services/auth/authDTOs";
 
 @Component({
   templateUrl: "login.component.html",
@@ -73,16 +73,14 @@ export class LoginComponent implements OnInit {
           this.route.snapshot.queryParams["returnUrl"] || "pages";
         console.log(returnUrl);
         this.router.navigate([returnUrl]).then(()=>{
-          this.loading = false;
         });
       }
         else
         {
-          this.error = "Đăng nhập với tài khoản Admin";
+          this.error = Msg.Login.InvalidPwd;
         } 
-
+        this.loading = false;
         // console.log("Login ok +"+data.data.data.token) 
     });
-    this.loading = false;
   }
 }

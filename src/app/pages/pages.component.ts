@@ -19,10 +19,10 @@ export class PagesComponent {
     private auth:UsersClient,
     private router: Router,
   ) {
-    this.auth.getCurrentUser().subscribe((res:any)=>{
-      if(res.status!==200|| res.data.data.role!=='admin')
-        this.router.navigate(["auth"]);
-    })
+    // this.auth.getCurrentUser().subscribe((res:any)=>{
+    //   if(res.status!==200|| res.data.data.role!=='admin')
+    //     this.router.navigate(["auth"]);
+    // })
   }
   menu = MENU_ITEMS;
 }

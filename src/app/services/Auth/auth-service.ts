@@ -1,5 +1,5 @@
 //import { HOST_API } from "app/service/serviceBase";
-import { FileResponse, FileParameter, SwaggerResponse, HOST_API, ApiException } from "../ServiceBase"
+import { FileResponse, FileParameter, SwaggerResponse, HOST_API, ApiException } from "../service-base"
 import { Injectable,InjectionToken,Inject,Optional} from '@angular/core';
 import {
     ChangePasswordCommand,
@@ -9,7 +9,7 @@ import {
     SendCodeResetPasswordCommand,
     UserLoginRequest
 }
-    from "./AuthDTOs"
+    from "./authDTOs"
 import { HttpClient } from "@angular/common/http";
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 @Injectable({
