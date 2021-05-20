@@ -7,84 +7,20 @@ import { NbDialogService } from "@nebular/theme";
 import { SongDialogComponent } from "./showcase-dialog/song-dialog.component";
 import { Common,parseDatetime } from "../common/conmmon";
 import { SortParameter } from "app/services/service-base";
+import {MatTableDataSource} from "@angular/material/table"
+import { ViewChild } from '@angular/core';
+import {
+  PageEvent,
+  MatPaginator,
+} from '@angular/material/paginator';
 @Component({
   selector: "ngx-song",
   templateUrl: "./song.component.html",
   styleUrls: ["./song.component.scss"],
 })
 export class SongComponent implements OnInit {
-  score=[
-    {
-      username:"aa",
-      age:10,
-      title :"aaaa"
-    }
-  ]
-  settings = {
-    // add: {
-    //   addButtonContent: '<i class="nb-plus"></i>',
-    //   createButtonContent: '<i class="nb-checkmark"></i>',
-    //   cancelButtonContent: '<i class="nb-close"></i>',
-    // },
-    hideSubHeader: true,
-    actions: {
-      columnTitle: "              ",
-      edit: false,
-      position: "right",
-    },
-    // add:false,
-    // edit:false,
-    // edit: {
-    //   editButtonContent: '<i class="nb-edit"></i>',
-    //   saveButtonContent: '<i class="nb-checkmark"></i>',
-    //   cancelButtonContent: '<i class="nb-close"></i>',
-    // },
-    columns: {
-      id: {
-        title: "ID",
-        type: "number",
-        width: "7%",
-      },
-      thumbnail: {
-        title: "Ảnh bìa",
-        width: "10%",
-        type: "html",
-        valuePrepareFunction: (image) => {
-          return `<img class='table-thumbnail-img' width="50" height="50" src="${image}"/>`;
-        },
-      },
-      name: {
-        title: "Tên bài hát",
-        type: "string",
-      },
-      duration: {
-        title: "Độ dài",
-        type: "number",
-      },
-      // owners: {
-      //   title: "Ca sĩ",
-      //   type: "string",
-      //   valuePrepareFunction: (o) => {
-      //     let Singers = "";
-      //     o.forEach((element) => {
-      //       Singers += element.nameOwner + ", ";
-      //     });
-      //     return Singers;
-      //   },
-      // },
-      dateCreate: {
-        title: "Ngày tạo",
-        type: "string",
-        valuePrepareFunction: (d) => {return parseDatetime(d)}
-      },
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
-  };
 
-  songs: Array<any> = [];
+  public songs = new MatTableDataSource();
   source: LocalDataSource = new LocalDataSource();
   id: number;
   index: number = 1;
@@ -94,6 +30,12 @@ export class SongComponent implements OnInit {
   Keyword: string;
   IdSelect: number;
   sortParameter: SortParameter;
+
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  pageEvent: PageEvent;
   constructor(
     public songService: SongHttpClient,
     private dialogService: NbDialogService,
@@ -106,11 +48,17 @@ export class SongComponent implements OnInit {
     this.load();
 
   }
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
+  }
   ngOnInit(): void {}
   load() {
     this.sortParameter.init({index:10})
     this.songService.get(this.sortParameter).then((res: any) => {
       this.files = [];
+      this.songs.data =res.data
       this.source.load(res.data);
     });
   }

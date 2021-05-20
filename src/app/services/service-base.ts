@@ -3,7 +3,7 @@ import { Observable, throwError as _observableThrow, of as _observableOf } from 
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
-export const HOST_API = 'http://103.92.29.98'
+export const HOST_API = 'http://localhost:5000'
 
 export class SwaggerResponse<TResult> {
     status: number;

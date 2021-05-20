@@ -31,29 +31,61 @@
     <!-- <ng2-smart-table class="table-song" [settings]="settings" [source]="source"
       (userRowSelect)="onRowSelect($event);openWithoutBackdropClick(dialog)" (deleteConfirm)="onDeleteConfirm($event)">
     </ng2-smart-table> -->
-    <mat-table [dataSource]="score">
+    <mat-table #table [dataSource]="songs" matSort matPaginator class="mat-elevation-z8">
       <!-- User name Definition -->
-      <ng-container matColumnDef="username">
-        <mat-header-cell *matHeaderCellDef> User name </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.username}} </mat-cell>
-      </ng-container>
-    
-      <!-- Age Definition -->
-      <ng-container matColumnDef="age">
-        <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.age}} </mat-cell>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
       </ng-container>
     
       <!-- Title Definition -->
-      <ng-container matColumnDef="title">
-        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+      <ng-container matColumnDef="thubnail">
+        <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+        <mat-cell *matCellDef="let row"> <img width="40px" src={{row.thumbnail}}> </mat-cell>
+      </ng-container>
+
+      <!-- Age Definition -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
       </ng-container>
     
+      <!-- Title Definition -->
+      <ng-container matColumnDef="duration">
+        <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.duration}} </mat-cell>
+      </ng-container>
+    
+      <!-- Title Definition -->
+      <ng-container matColumnDef="datecreate">
+        <mat-header-cell *matHeaderCellDef> Date create </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.dateCreate}} </mat-cell>
+      </ng-container>
+
       <!-- Header and Row Declarations -->
-      <mat-header-row *matHeaderRowDef="['username', 'age', 'title']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['username', 'age', 'title']"></mat-row>
+      <mat-header-row *matHeaderRowDef="['id','thubnail', 'name', 'duration','datecreate']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['id','thubnail', 'name', 'duration','datecreate']"></mat-row>
     </mat-table>
+    <mat-form-field>
+      <mat-label>List length</mat-label>
+      <input matInput [(ngModel)]="length" type="number">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Page size</mat-label>
+      <input matInput [(ngModel)]="pageSize" type="number">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Page size options</mat-label>
+      <input matInput [ngModel]="pageSizeOptions" (ngModelChange)="setPageSizeOptions($event)"
+             [ngModelOptions]="{updateOn: 'blur'}" placeholder="Ex. 10,25,50">
+    </mat-form-field>
+    <mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageEvent = $event">
+</mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </nb-card-body>
 </nb-card>
 
