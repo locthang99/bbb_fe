@@ -5,6 +5,8 @@ import {SongComponent} from './song.component'
 import { ThemeModule } from '../../@theme/theme.module';
 import {MatTableModule} from "@angular/material/table"
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+
 @NgModule({
   imports: [
     NbCardModule,
@@ -13,7 +15,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ThemeModule,
     Ng2SmartTableModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule
     
   ],
   declarations:[

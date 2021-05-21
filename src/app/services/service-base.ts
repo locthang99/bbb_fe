@@ -18,42 +18,6 @@ export class SwaggerResponse<TResult> {
     }
 }
 
-export class SortParameter{
-    index: number | undefined;
-    pageSize: number | undefined;
-    sortBy: string | null | undefined;
-    sortASC: boolean | undefined;
-    // constructor (index:number,pageSize:number,sortBy:string,sortASC:boolean)
-    // {
-    //     this.index = index,
-    //     this.pageSize = pageSize,
-    //     this.sortBy = sortBy,
-    //     this.sortASC =sortASC
-    // }
-    init(_data?: any) {
-        if (_data) {
-            this.index = _data['index'],
-            this.pageSize = _data['pageSize'],
-            this.sortBy = _data['sortBy'],
-            this.sortASC =_data['sortASC']
-        }
-    }
-
-    // static fromJS(data: any): SortParameter {
-    //     data = typeof data === 'object' ? data : {};
-    //     let result = new SortParameter();
-    //     result.init(data);
-    //     return result;
-    // }
-
-    // toJSON(data?: any) {
-    //     data = typeof data === 'object' ? data : {};
-    //     data["objId"] = this.objId;
-    //     data["content"] = this.content;
-    //     return data; 
-    // }
-    
-}
 
 export interface FileParameter {
     data: any;

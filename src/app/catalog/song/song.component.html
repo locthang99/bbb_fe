@@ -31,10 +31,12 @@
     <!-- <ng2-smart-table class="table-song" [settings]="settings" [source]="source"
       (userRowSelect)="onRowSelect($event);openWithoutBackdropClick(dialog)" (deleteConfirm)="onDeleteConfirm($event)">
     </ng2-smart-table> -->
-    <mat-table #table [dataSource]="songs" class="mat-elevation-z8" matSort matSortActive="id" matSortDisableClear matSortDirection="desc">
+    <ngx-search-input placeholderString = "Name or id song"></ngx-search-input>
+    <mat-table #table [dataSource]="songs.data" class="mat-elevation-z8" matSort matSortActive="id" matSortDisableClear
+      matSortDirection="desc">
       <!-- User name Definition -->
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef  mat-sort-header disableClear> Id </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Id </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
       </ng-container>
 
@@ -46,60 +48,60 @@
 
       <!-- Age Definition -->
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Name </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="singers">
         <mat-header-cell *matHeaderCellDef> Singers </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.singers[0].nameSinger}} </mat-cell>
+        <mat-cell *matCellDef="let row"> <span *ngFor="let s of row.singers"> {{s.nameSinger}},</span> </mat-cell>
       </ng-container>
 
       <!-- Title Definition -->
       <ng-container matColumnDef="duration">
-        <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Duration </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.duration}} </mat-cell>
       </ng-container>
 
       <!-- Title Definition -->
       <ng-container matColumnDef="datecreate">
-        <mat-header-cell *matHeaderCellDef> Date create </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Date create </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.dateCreate.slice(0,10)}} </mat-cell>
       </ng-container>
 
       <!-- Title Definition -->
       <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
-        <mat-cell *matCellDef="let row"> 
+        <mat-cell *matCellDef="let row">
 
-          
+
 
         </mat-cell>
       </ng-container>
 
       <!-- Header and Row Declarations -->
-      <mat-header-row *matHeaderRowDef="['id','thubnail', 'name','singers', 'duration','datecreate','action']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['id','thubnail', 'name','singers', 'duration','datecreate','action']"></mat-row>
+      <mat-header-row *matHeaderRowDef="['id','thubnail', 'name','singers', 'duration','datecreate','action']">
+      </mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['id','thubnail', 'name','singers', 'duration','datecreate','action']">
+      </mat-row>
     </mat-table>
-    <!-- <mat-paginator [length]="length"
-               [pageSize]="pageSize"
-               [pageSizeOptions]="pageSizeOptions"
-               (page)="pageEvent = $event">
-    </mat-paginator> -->
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+    <mat-paginator [length]="songs.totalItem" [pageSize]="songs.pageSize" [pageIndex]="songs.index"
+      [pageSizeOptions]="[5,10,15,20]" (page)="$event; onChangePaginator($event)" showFirstLastButtons>
+    </mat-paginator>
+
   </nb-card-body>
 </nb-card>
 
 <!-- <ng-template #dialog let-data let-ref="dialogRef">
   <div class="container-card-song">
 
-    
+
     <div class="movie-card container">
 
       <div class="container card-child">
 
         <a><img src="{{data.song.thumbnail}}" alt="cover" class="cover" /></a>
-        
+
         <div class="hero">
           <div class="avatars">
             <li style="display: inline; list-style: none;" *ngFor="let u of data.song.owners">
@@ -109,7 +111,7 @@
             </li>
           </div>
           <div class="details">
-            
+
             <div class="title1">{{data.song.name}}</div>
 
             <div class="title2">{{data.singers}}</div>
@@ -117,7 +119,7 @@
               <source src="{{data.song.fileMusic}}" type="audio/mp3">
               Your browser does not support the audio tag.
             </audio>
-            
+
 
             <div class="infor">
               <i class="fa fa-heart likes"> {{data.song.totalLike}}</i>
@@ -126,9 +128,9 @@
             </div>
 
 
-          </div> 
+          </div>
 
-        </div> 
+        </div>
 
         <div class="description">
 
@@ -136,7 +138,7 @@
           <div class="column1">
 
 
-          </div> 
+          </div>
 
           <div class="column2">
 
@@ -150,11 +152,11 @@
             <div>Mô tả: </div>
             <textarea rows="3" nbInput fullWidth shape="round"
               placeholder="Text Area">{{data.song.description}}</textarea>
-          </div> 
-        </div> 
+          </div>
+        </div>
 
-      </div> 
-    </div> 
+      </div>
+    </div>
   </div>
 </ng-template> -->
 

@@ -1,10 +1,13 @@
 :host {
   display: flex;
   align-items: center;
-
   i.control-icon {
+    background-color: rgb(1, 154, 224);
+    color: beige;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
     &::before {
-      font-size: 2.3rem;
+      font-size: 2rem;
     }
 
     &:hover {
@@ -13,16 +16,15 @@
   }
 
   input {
+    text-indent: 10px;
     border: none;
     outline: none;
-    margin-left: 1rem;
-    width: 15rem;
+    width: 28rem;
+    height: 30px;
     transition: width 0.2s ease;
+    border: 1px solid;
+    border-radius: 5px;
 
-    &.hidden {
-      width: 0;
-      margin: 0;
-    }
   }
 
   ::ng-deep search-input {

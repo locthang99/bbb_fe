@@ -1,10 +1,11 @@
-import { FileResponse, FileParameter, SwaggerResponse, HOST_API, ApiException,SortParameter } from "../service-base"
+import { FileResponse, FileParameter, SwaggerResponse, HOST_API, ApiException } from "../service-base"
 import { Injectable,InjectionToken,Inject,Optional} from '@angular/core';
 import {
     CommentCommand
 }
     from "./song-dto"
 import { HttpClient } from "@angular/common/http";
+import {SortParameter}  from "../dto-base" 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 @Injectable({
     providedIn: 'root',

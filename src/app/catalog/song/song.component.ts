@@ -1,13 +1,16 @@
-import { Component, OnInit, TemplateRef,ViewChild } from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { LocalDataSource } from "ng2-smart-table";
 import { SongHttpClient } from "app/services/song/song-service";
 import { NbDialogService } from "@nebular/theme";
-import { Common,parseDatetime } from "../common/conmmon";
-import { SortParameter } from "app/services/service-base";
-import {MatTableDataSource} from "@angular/material/table"
-import {MatMenuTrigger} from "@angular/material/menu"
+import { Common, parseDatetime } from "../common/conmmon";
+import { SortParameter, PagedSortResponse } from "app/services/dto-base";
+import {SearchInputComponent} from '../../@theme/components/search-input/search-input.component';
+import { MatTableDataSource } from "@angular/material/table"
+import { MatMenuTrigger } from "@angular/material/menu"
+import {MatSort} from '@angular/material/sort';
 import {
   MatPaginator,
+  PageEvent
 } from '@angular/material/paginator';
 @Component({
   selector: "ngx-song",
@@ -17,49 +20,48 @@ import {
 export class SongComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+  @ViewChild(MatSort) sort: MatSort;
 
-  someMethod() {
-    this.trigger.openMenu();
-  }
-  public songs = new MatTableDataSource();
-  source: LocalDataSource = new LocalDataSource();
+  pageEvent: PageEvent;
+  public songs = new PagedSortResponse()
   id: number;
-  index: number = 1;
-  public pagsize: number = 20;
-  xemthem: boolean = false;
   public files: Array<any> = [];
   Keyword: string;
   IdSelect: number;
   sortParameter: SortParameter;
 
-  length = 100;
-  pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
-
   constructor(
-    public songService: SongHttpClient,
-    private dialogService: NbDialogService,
-    private common: Common
+    public songService: SongHttpClient
   ) {
     this.id = 1;
-    this.pagsize = 20;
     this.sortParameter = new SortParameter()
-    this.sortParameter.init({index:2,pageSize:5})
-    this.load();
-
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.load();
+  }
   ngAfterViewInit() {
-    //this.songs.paginator = this.paginator;
+    this.sort.sortChange.subscribe(() => {
+      this.sortParameter.sortBy = this.sort.active;
+      this.sort.start = this.sort.start === "asc"? "desc":"asc"
+      this.sortParameter.sortASC = this.sort.start === "asc"? true:false;
+      this.songService.get(this.sortParameter).then((res: any) => {
+        this.songs = res
+      });
+    });
   }
   load() {
     this.songService.get(this.sortParameter).then((res: any) => {
-      this.files = [];
-      this.songs.data =res.data
-      this.paginator.length = res.totalItem
-      this.paginator.pageIndex = res.index
-      this.source.load(res.data);
+      this.songs = res
+    });
+  }
+  onChangePaginator(event: PageEvent) {
+    if (event.pageIndex <= 0)
+      this.sortParameter.index = 1
+    else
+      this.sortParameter.index = event.pageIndex
+    this.sortParameter.pageSize = event.pageSize
+    this.songService.get(this.sortParameter).then((res: any) => {
+      this.songs = res
     });
   }
   // seemore() {
@@ -145,7 +147,7 @@ export class SongComponent implements OnInit {
   //         closeOnBackdropClick: true,
   //       });
   //     });
-      
+
   //   });
   // }
 
