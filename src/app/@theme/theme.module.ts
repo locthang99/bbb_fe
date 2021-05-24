@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MaterialModule} from '../material-module'
 import {
   NbActionsModule,
   NbLayoutModule,
@@ -21,6 +22,9 @@ import {
   HeaderComponent,
   SearchInputComponent,
   TinyMCEComponent,
+  TestCustomComponent,
+  TableDataComponent
+  
 } from './components';
 import {
   CapitalizePipe,
@@ -38,6 +42,9 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
+
+const CUSTOM_MODULES =[
+];
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -61,6 +68,7 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  TableDataComponent
 ];
 const PIPES = [
   CapitalizePipe,
@@ -71,7 +79,7 @@ const PIPES = [
 ];
 
 @NgModule({
-  imports: [CommonModule, ...NB_MODULES],
+  imports: [CommonModule, ...NB_MODULES,...CUSTOM_MODULES,MaterialModule],
   exports: [CommonModule, ...PIPES, ...COMPONENTS],
   declarations: [...COMPONENTS, ...PIPES],
 })

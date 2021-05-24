@@ -12,6 +12,9 @@ import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { TableDataModule } from "./@theme/components/table-data/table-data.module"
+import {MaterialModule} from './material-module'
+
 import {
   NbChatModule,
   NbDatepickerModule,
@@ -25,6 +28,7 @@ import {
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,

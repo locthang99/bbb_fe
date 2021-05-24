@@ -7,10 +7,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
-import {MatTableModule} from "@angular/material/table"
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSortModule} from '@angular/material/sort';
+import {TableDataModule} from "../@theme/components/table-data/table-data.module";
+import {MaterialModule} from "../material-module"
+
+
 
 
 @NgModule({
@@ -21,10 +21,8 @@ import {MatSortModule} from '@angular/material/sort';
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatSortModule
+    MaterialModule
+    
   ],
   declarations: [
     PagesComponent,

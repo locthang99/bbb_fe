@@ -30,6 +30,7 @@ export class PagedSortResponse{
         this.index = 1;
         this.pageSize = 0;
         this.totalItem = 0;
+        this.data=[]
     }
     init(_data?: any) {
         if (_data) {

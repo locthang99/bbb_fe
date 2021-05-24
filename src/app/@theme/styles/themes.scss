@@ -2,6 +2,7 @@
 @import '~@nebular/theme/styles/theming';
 // @nebular out of the box themes
 @import '~@nebular/theme/styles/themes';
+ @import './table.scss';
 
 $nb-themes: nb-register-theme((
   layout-padding-top: 2.25rem,
