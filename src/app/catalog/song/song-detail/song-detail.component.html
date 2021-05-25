@@ -15,7 +15,10 @@
               <!-- <img *ngIf="song.thumbnail=='' || song.thumbnail==null" src="https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png" alt="Admin" class="rounded-circle" width="150"> -->
               <img src="{{song.thumbnail}}" alt="Admin" class="rounded-circle" width="150">
               <div class="mt-3">
-                <h4>{{song.name}}</h4>
+                <h4 style="font-size: 1.625rem;
+                font-family: Open Sans, sans-serif;
+                font-weight: 700;
+                line-height: 2rem;">{{song.name}}</h4>
                 <li style="display: inline; list-style: none;" *ngFor="let sg of song.singers">
                   <p class="text-secondary mb-1">{{sg.nameSinger}}</p>
                 </li>

@@ -8,7 +8,9 @@ export const lang ={
         name:"Tên",
         image:"Ảnh",
         duration:"Độ dài",
+        totalSong:"Số bài",
         singers:"Ca sĩ",
+        owner:"Nguời tạo",
         dateCreate:"Ngày tạo",
         action:"Thao tác",
 

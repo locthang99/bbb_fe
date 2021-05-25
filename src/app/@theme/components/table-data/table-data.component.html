@@ -29,9 +29,20 @@
     <mat-cell *matCellDef="let row" class="col-max-w-8"> {{row.duration}} </mat-cell>
   </ng-container>
 
+  <ng-container *ngIf="inputColumns.includes('totalSong')" matColumnDef="totalSong">
+    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear class="col-max-w-8"> {{lang.table.totalSong}}
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row" class="col-max-w-8"> {{row.totalSong}} </mat-cell>
+  </ng-container>
+
   <ng-container *ngIf="inputColumns.includes('singers')" matColumnDef="singers">
     <mat-header-cell *matHeaderCellDef> {{lang.table.singers}} </mat-header-cell>
     <mat-cell *matCellDef="let row"> <span *ngFor="let s of row.singers"> {{s.nameSinger}}, </span> </mat-cell>
+  </ng-container>
+
+  <ng-container *ngIf="inputColumns.includes('owner')" matColumnDef="owner">
+    <mat-header-cell *matHeaderCellDef> {{lang.table.owner}} </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.owner.nameOwner}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="dateCreate">
