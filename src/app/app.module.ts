@@ -14,6 +14,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TableDataModule } from "./@theme/components/table-data/table-data.module"
 import {MaterialModule} from './material-module'
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './@http-interceptors/auth-interceptor';
+import {HttpErrorInterceptor} from './@http-interceptors/http-error-interceptor';
 
 import {
   NbChatModule,
@@ -48,6 +51,18 @@ import {
     ThemeModule.forRoot(),
   ],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ]
 })
 export class AppModule {
 }

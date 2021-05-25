@@ -11,10 +11,12 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     providedIn: 'root',
     })
     export class SongHttpClient {
+        private http: HttpClient;
         private baseUrl: string;
         protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
     
-        constructor(@Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        constructor(@Inject(HttpClient) http: HttpClient,@Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+            this.http = http;
             this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:5001";
         }
     
@@ -36,8 +38,8 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
                     "Accept": "application/json"
                 }
             };
-    
-            return fetch(url_, options_).then(_response => _response.json())
+            
+            return this.http.get(url_,options_).toPromise()
         }   
     
         create(name: string | null | undefined, description: string | null | undefined, lyric: FileParameter | null | undefined, duration: number | undefined, thumbnail: FileParameter | null | undefined, fileMusic: FileParameter | null | undefined, isPublic: boolean | undefined): Promise<any> {

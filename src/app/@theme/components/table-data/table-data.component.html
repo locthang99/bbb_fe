@@ -40,14 +40,17 @@
   </ng-container>
 
   <ng-container *ngIf="inputColumns.includes('action')" matColumnDef="action">
-    <mat-header-cell *matHeaderCellDef> {{lang.table.action}} </mat-header-cell>
-    <mat-cell *matCellDef="let row">
+    <mat-header-cell *matHeaderCellDef class="col-max-w-10"> {{lang.table.action}} </mat-header-cell>
+    <mat-cell *matCellDef="let row" class="col-max-w-10">
+      <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onClickRow.emit(row.id)">edit_note</mat-icon>
+      <div></div>
+      <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="">delete</mat-icon>
     </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef=inputColumns>
   </mat-header-row>
-  <mat-row *matRowDef="let row; columns: inputColumns" (click)="onClickRow.emit(row.id)">
+  <mat-row *matRowDef="let row; columns: inputColumns">
   </mat-row>
 </mat-table>
 <h3 class="text-center" *ngIf="dataSource.data.length === 0">No records found</h3>

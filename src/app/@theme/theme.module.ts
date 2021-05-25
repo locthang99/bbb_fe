@@ -23,7 +23,8 @@ import {
   SearchInputComponent,
   TinyMCEComponent,
   TestCustomComponent,
-  TableDataComponent
+  TableDataComponent,
+  ToastComponent
   
 } from './components';
 import {
@@ -68,7 +69,8 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
-  TableDataComponent
+  TableDataComponent,
+  ToastComponent
 ];
 const PIPES = [
   CapitalizePipe,
