@@ -9,6 +9,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {TableDataModule} from "../@theme/components/table-data/table-data.module";
 import {MaterialModule} from "../material-module"
+import {CatalogModule} from "../catalog/catalog-module"
 
 
 
@@ -21,7 +22,7 @@ import {MaterialModule} from "../material-module"
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
-    MaterialModule
+    CatalogModule
     
   ],
   declarations: [

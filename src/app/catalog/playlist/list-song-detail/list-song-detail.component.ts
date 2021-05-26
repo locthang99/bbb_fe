@@ -30,15 +30,17 @@ import { id } from "@swimlane/ngx-charts";
   selector: "ngx-list-song-detail",
   templateUrl: "./list-song-detail.component.html",
 })
-
+@Injectable({
+  providedIn: 'root',
+})
 export class ListSongDetailComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  // @Input("placeholderString") placeholderString: string;
-  // @Input("inputColumns") inputColumns: string[];
+  @Input("placeholderString") placeholderString: string;
+  @Input("inputColumns") inputColumns: string[];
   @Input("playlistId") playlistId:number
-  //@ViewChild('input', { static: true }) input: ElementRef;
+  @ViewChild('input', { static: true }) input: ElementRef;
   @Output() onClickRow: EventEmitter<string> = new EventEmitter<string>();
 
   //public variables
@@ -47,7 +49,7 @@ export class ListSongDetailComponent implements OnInit {
 
   //table data
   pageEvent: PageEvent;
-  dataSource: PagedSortResponse;
+  songs: PagedSortResponse;
   sortParameter: SortParameter;
 
   // item select
@@ -56,15 +58,16 @@ export class ListSongDetailComponent implements OnInit {
 
   constructor(public services : PlaylistHttpClient) {
     console.log("init");
-    this.dataSource = new PagedSortResponse();
+    this.songs = new PagedSortResponse();
     this.sortParameter = new SortParameter();
+    this.sortParameter.pageSize=5;
   }
 
   ngOnInit(): void {
     console.log("init");
     this.isLoading = true;
     this.services.getSong(this.playlistId,this.sortParameter).then((res: any) => {
-      this.dataSource = res;
+      this.songs = res;
       this.isLoading = false;
     });
   }
@@ -76,7 +79,7 @@ export class ListSongDetailComponent implements OnInit {
       this.sortParameter.sortASC = this.sort.start === "asc" ? true : false;
       this.isLoading = true;
       this.services.getSong(this.playlistId,this.sortParameter).then((res: any) => {
-        this.dataSource = res;
+        this.songs = res;
         this.isLoading = false;
       });
     });
@@ -87,7 +90,7 @@ export class ListSongDetailComponent implements OnInit {
     this.sortParameter.pageSize = event.pageSize;
     this.sortParameter.index = event.pageIndex;
     this.services.getSong(this.playlistId,this.sortParameter).then((res: any) => {
-      this.dataSource = res;
+      this.songs = res;
       this.isLoading = false;
     });
   }
@@ -97,7 +100,7 @@ export class ListSongDetailComponent implements OnInit {
     this.sortParameter = new SortParameter();
     this.isLoading = true;
     this.services.getByName(keyword, this.sortParameter).then((res) => {
-      this.dataSource = res;
+      this.songs = res;
       this.isLoading = false;
     });
   }

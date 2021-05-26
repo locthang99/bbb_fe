@@ -24,7 +24,7 @@ import {
   TinyMCEComponent,
   TestCustomComponent,
   TableDataComponent,
-  ToastComponent
+  ToastComponent,
   
 } from './components';
 import {
@@ -70,7 +70,7 @@ const COMPONENTS = [
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
   TableDataComponent,
-  ToastComponent
+  ToastComponent,
 ];
 const PIPES = [
   CapitalizePipe,

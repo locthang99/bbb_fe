@@ -49,56 +49,57 @@
               </div>
             </li>
           </ul>
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <h3 class="col-sm-3">ID: {{playlist.id}}</h3>
+                <h3 class="col-sm-5">{{lang.detail.dateCreate}}: {{playlist.dateCreate.slice(0,10)}}</h3>
+                <h3 class="col-sm-3">{{lang.detail.totalSong}}: {{playlist.totalSong}}</h3>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-12">
+                  <h3 class="mb-0">{{lang.detail.description}}: {{playlist.description}}</h3>
+                </div>
+              </div>
+              <hr>
+  
+  
+  
+  
+              <!-- <div class="row">
+                <div class="col-sm-4">
+                  VIP:
+                  <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style"
+                    [value]="playlist.playlistVip? 'on' : 'off'">
+                    <mat-button-toggle value="on">ON</mat-button-toggle>
+                    <mat-button-toggle value="off">OFF</mat-button-toggle>
+                  </mat-button-toggle-group>
+                </div>
+                <div class="col-sm-4">
+                  Official:
+                  <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" value="on">
+                    <mat-button-toggle value="on" selected>ON</mat-button-toggle>
+                    <mat-button-toggle value="off">OFF</mat-button-toggle>
+                  </mat-button-toggle-group>
+                </div>
+                <div class="col-sm-4">
+                  {{lang.detail.checked}}:
+                  <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" value="on">
+                    <mat-button-toggle value="on" selected>ON</mat-button-toggle>
+                    <mat-button-toggle value="off">OFF</mat-button-toggle>
+                  </mat-button-toggle-group>
+                </div>
+  
+              </div>
+              <hr> -->
+  
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-md-8">
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="row">
-              <h3 class="col-sm-3">ID: {{playlist.id}}</h3>
-              <h3 class="col-sm-5">{{lang.detail.dateCreate}}: {{playlist.dateCreate.slice(0,10)}}</h3>
-              <h3 class="col-sm-3">{{lang.detail.totalSong}}: {{playlist.totalSong}}</h3>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-12">
-                <h3 class="mb-0">{{lang.detail.description}}: {{playlist.description}}</h3>
-              </div>
-            </div>
-            <hr>
 
-
-
-
-            <div class="row">
-              <div class="col-sm-4">
-                VIP:
-                <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style"
-                  [value]="playlist.playlistVip? 'on' : 'off'">
-                  <mat-button-toggle value="on">ON</mat-button-toggle>
-                  <mat-button-toggle value="off">OFF</mat-button-toggle>
-                </mat-button-toggle-group>
-              </div>
-              <div class="col-sm-4">
-                Official:
-                <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" value="on">
-                  <mat-button-toggle value="on" selected>ON</mat-button-toggle>
-                  <mat-button-toggle value="off">OFF</mat-button-toggle>
-                </mat-button-toggle-group>
-              </div>
-              <div class="col-sm-4">
-                {{lang.detail.checked}}:
-                <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" value="on">
-                  <mat-button-toggle value="on" selected>ON</mat-button-toggle>
-                  <mat-button-toggle value="off">OFF</mat-button-toggle>
-                </mat-button-toggle-group>
-              </div>
-
-            </div>
-            <hr>
-
-          </div>
-        </div>
         <div class="card mb-3">
           <div class="card-body">
             <div class="row">
@@ -126,8 +127,7 @@
                         Currently I am {{panelOpenState ? 'open' : 'closed'}}
                       </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <ngx-list-song-detail [playlistId]=playlist.id>
-                  </ngx-list-song-detail>
+                    <ngx-list-song-detail [playlistId]=playlist.id ></ngx-list-song-detail>
                   </mat-expansion-panel>
                 </mat-accordion>
 
