@@ -1,17 +1,11 @@
-import { Component, Injectable, OnInit, TemplateRef } from "@angular/core";
-import { LocalDataSource } from "ng2-smart-table";
-import { PlayListsClient } from "app/service/Playlist/PlaylistService";
+import { Injectable} from "@angular/core";
 import { NbDialogService } from "@nebular/theme";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PopupDialogDialogComponent } from "../popup/popup-dialog.component";
 import { DatePipe } from '@angular/common';
 import {
   NbComponentStatus,
-  NbGlobalLogicalPosition,
   NbGlobalPhysicalPosition,
-  NbGlobalPosition,
   NbToastrService,
-  NbToastrConfig,
 } from '@nebular/theme';
 @Injectable({
   providedIn: "root",

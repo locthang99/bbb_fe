@@ -13,7 +13,7 @@ import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';
 // import from component custom
 import { SearchInputComponent } from "../../@theme/components/search-input/search-input.component";
 import {TableDataComponent} from "../../@theme/components/table-data/table-data.component";
-//import {SongDetailDialogComponent} from "./song-detail/song-detail.component"
+import {PlaylistDetailDialogComponent} from "./playlist-detail/playlist-detail.component"
 
 // import from utils
 import { lang } from "../../@language/language";
@@ -31,18 +31,18 @@ export class PlaylistComponent implements OnInit {
 
   //table data
   cols = ['id','thumbnail','name','owner','totalSong','dateCreate','action']
-  stringInput = lang.searchBar.placeHolerderSong
+  stringInput = lang.searchBar.placeHolerderPlaylist
 
-  constructor(public playlistService: PlaylistHttpClient,public songDetailDialog : MatDialog) {
+  constructor(public playlistService: PlaylistHttpClient,public playlistDetailDialog : MatDialog) {
     this.service = playlistService
   }
 
   ngOnInit(): void {
   }
-  onClickSong(songId:any)
+  onClickPlaylist(playlistId:any)
   {
-    // this.playlistService.getById(songId).then(res=>{
-    //   this.songDetailDialog.open(SongDetailDialogComponent,{data:res.data})
-    // })
+    this.playlistService.getById(playlistId).then(res=>{
+      this.playlistDetailDialog.open(PlaylistDetailDialogComponent,{data:res.data})
+    })
   }
 }

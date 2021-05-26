@@ -20,8 +20,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(request).do((event: HttpEvent<any>) => {
 
       if (event instanceof HttpResponse) {
-        console.log(request)
-        console.log(event) 
+        // console.log(request)
+        // console.log(event) 
         // do stuff with response if you want
       }
     }, (err: any) => {
@@ -29,14 +29,14 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           switch(err.status)
           {
               case 401:
-                this.t.openSnackBar(lang.response_action.Unauthorize)
+                this.t.openToast('danger','401',lang.response_action.Unauthorize)
                 console.log("401 interceptor");
                 break;
             case 403:
-                console.log(lang.response_action.Forbiden);
-                break;
+              this.t.openToast('danger','403',lang.response_action.Forbiden)
+              break;
             default:
-                this.t.openSnackBar('Request notfound '+err.status)
+              this.t.openToast('danger','404',lang.response_action.Notfound)
                 //console.log("errrorrrr: "+err.status)
                 break;
 

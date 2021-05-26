@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
+import {CatalogModule} from "./catalog/catalog.module"
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TableDataModule } from "./@theme/components/table-data/table-data.module"
@@ -49,6 +50,7 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    CatalogModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [

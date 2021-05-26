@@ -4,7 +4,13 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-
+import { NbDialogService } from "@nebular/theme";
+import { DatePipe } from '@angular/common';
+import {
+  NbComponentStatus,
+  NbGlobalPhysicalPosition,
+  NbToastrService,
+} from '@nebular/theme';
 import {lang} from "../../../@language/language"
 /**
  * @title Snack-bar with configurable position
@@ -17,16 +23,22 @@ import {lang} from "../../../@language/language"
   providedIn: 'root',
   })
 export class ToastComponent {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-  
-  constructor(private _snackBar: MatSnackBar) {}
 
-  public openSnackBar(msg) {
-    this._snackBar.open(msg, 'OK', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration:4*1000
-    });
+  constructor(private toastrService: NbToastrService) {}
+
+  public openToast(type: NbComponentStatus, title: string, body: string) {
+    const config = {
+      status: type,
+      destroyByClick: false,
+      duration: 5000,
+      hasIcon: true,
+      position: NbGlobalPhysicalPosition.TOP_RIGHT,
+      preventDuplicates: false,
+    };
+    const titleContent = title ? `: ${title}` : '';
+    this.toastrService.show(
+      body,
+      `Code ${titleContent}`,
+      config);
   }
 }

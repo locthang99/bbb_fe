@@ -4,12 +4,10 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
   selector: 'ngx-search-input',
   styleUrls: ['./search-input.component.scss'],
   template: `
-    <input class="search-input" placeholder={{placeholderString}}
-           #input>
-           <div class="con-icon">
-           <i class="control-icon ion ion-ios-search"
-           (click)="onSearch.emit(input.value)"></i>
-           </div>
+    <input class="search-input" type="search" placeholder={{placeholderString}} #input>
+           <button type="button" class="btn btn-primary" (click)="onSearch.emit(input.value)">
+           <i class="fas fa-search"></i>
+         </button>
   `,
 })
 export class SearchInputComponent {
