@@ -11,5 +11,6 @@ export class PlaylistDetailDialogComponent {
   @Input() title: string;
   lang = lang;
   panelOpenState = false;
+  openAddSong = false;
   constructor(@Inject(MAT_DIALOG_DATA) public playlist: any) {}
 }

@@ -27,9 +27,11 @@ export const lang ={
         totalDowload:"Số lượt tải",
         dateCreate:"Ngày tạo",
         owner:"Người tạo",
-        description:"Mô tả"
-
+        description:"Mô tả",
+        listSongAdded:"Danh sách bài hát",
+        listSongAdd:"Thêm bài hát"
     },
+
     response_action:{
         Forbiden:"Không có quyền chỉnh sửa",
         Unauthorize:"Đăng nhập lại",

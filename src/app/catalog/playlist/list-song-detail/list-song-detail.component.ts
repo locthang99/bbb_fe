@@ -24,7 +24,6 @@ import { SearchInputComponent } from "../../../@theme/components/search-input/se
 
 // import from utils
 import { lang } from "../../../@language/language";
-import { id } from "@swimlane/ngx-charts";
 
 @Component({
   selector: "ngx-list-song-detail",
@@ -39,7 +38,8 @@ export class ListSongDetailComponent implements OnInit {
 
   @Input("placeholderString") placeholderString: string;
   @Input("inputColumns") inputColumns: string[];
-  @Input("playlistId") playlistId:number
+  @Input("playlistId") playlistId:number;
+  @Input("isSearch") isSearch:boolean;
   @ViewChild('input', { static: true }) input: ElementRef;
   @Output() onClickRow: EventEmitter<string> = new EventEmitter<string>();
 
