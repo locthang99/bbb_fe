@@ -1,0 +1,63 @@
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" class="firstFormGroup">
+      <ng-template matStepLabel>Tạo bài hát</ng-template>
+
+      <!-- Select File -->
+      <mat-label>Ảnh bìa</mat-label>
+      <input type="file" accept="*" (change)="showPreview($event)" />
+      <!-- Image Preview -->
+      <div class="">
+        <img [src]="imageURL" class="imagePreview">
+      </div>
+
+      <mat-label>File nhạc</mat-label>
+      <input type="file" accept="audio/mp3" (change)="showPreviewMusic($event)" />
+      <!-- Image Preview -->
+      <div class="">
+        <audio id="music" style="height: 25px;" controls>
+          <source [src]="fileMusic" type="audio/mp3">
+          Your browser does not support the audio tag.
+        </audio>
+      </div>
+
+      <mat-form-field>
+        <mat-label>Tên Song</mat-label>
+        <input matInput formControlName="name" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Mô tả</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <div>
+        <button mat-button (click)="create()">Tạo</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Type</ng-template>
+    <div **ngIf="isLoading">Loading</div>
+    <div>{{resultPredict}}</div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Tag</ng-template>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Chọn ca sĩ/nhạc sĩ</ng-template>
+    <mat-tab-group mat-stretch-tabs>
+      <div>type</div>
+    </mat-tab-group>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

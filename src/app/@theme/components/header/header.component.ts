@@ -50,10 +50,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private breakpointService: NbMediaBreakpointsService,
               private auth : UsersClient
               ) {
-                this.auth.getCurrentUser().subscribe((res:any)=>{
-                  if(res.status==200)
-                  this.user=res.data.data
-                })
+                // this.auth.getCurrentUser().subscribe((res:any)=>{
+                //   if(res.status==200)
+                //   this.user=res.data.data
+                // })
   }
 
   ngOnInit() {

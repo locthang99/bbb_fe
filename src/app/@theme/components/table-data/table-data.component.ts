@@ -62,7 +62,16 @@ export class TableDataComponent implements OnInit {
   ngOnInit(): void {
     console.log("init");
     this.isLoading = true;
-    this.services.get(this.sortParameter).then((res: any) => {
+    this.services.getByName(this.keyword,this.sortParameter).then((res: any) => {
+      this.dataSource = res;
+      this.isLoading = false;
+    });
+  }
+  
+  loaData()
+  {
+    this.isLoading = true;
+    this.services.getByName(this.keyword,this.sortParameter).then((res: any) => {
       this.dataSource = res;
       this.isLoading = false;
     });
@@ -73,31 +82,26 @@ export class TableDataComponent implements OnInit {
       this.sortParameter.sortBy = this.sort.active;
       this.sort.start = this.sort.start === "asc" ? "desc" : "asc";
       this.sortParameter.sortASC = this.sort.start === "asc" ? true : false;
-      this.isLoading = true;
-      this.services.get(this.sortParameter).then((res: any) => {
-        this.dataSource = res;
-        this.isLoading = false;
-      });
+      this.loaData()
     });
   }
 
   onChangePaginator(event: PageEvent) {
-    this.isLoading = true;
     this.sortParameter.pageSize = event.pageSize;
     this.sortParameter.index = event.pageIndex;
-    this.services.get(this.sortParameter).then((res: any) => {
-      this.dataSource = res;
-      this.isLoading = false;
-    });
+    this.loaData()
   }
 
   onSearch(keyword: any) {
     this.keyword = keyword;
     this.sortParameter = new SortParameter();
-    this.isLoading = true;
-    this.services.getByName(keyword, this.sortParameter).then((res) => {
-      this.dataSource = res;
-      this.isLoading = false;
-    });
+    this.loaData()
+  }
+
+  onDelete(id:any)
+  {
+    this.services.delete(id).then(res=>{
+      this.loaData()
+    })
   }
 }

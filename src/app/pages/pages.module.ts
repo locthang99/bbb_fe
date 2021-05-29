@@ -10,7 +10,7 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {TableDataModule} from "../@theme/components/table-data/table-data.module";
 import {MaterialModule} from "../material-module"
 import {CatalogModule} from "../catalog/catalog-module"
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -22,7 +22,9 @@ import {CatalogModule} from "../catalog/catalog-module"
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
-    CatalogModule
+    CatalogModule,
+    FormsModule,
+    ReactiveFormsModule
     
   ],
   declarations: [

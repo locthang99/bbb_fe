@@ -17,7 +17,7 @@ export class PlaylistHttpClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:5001";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : HOST_API;
     }
 
     get(sortParameter: SortParameter): Promise<any> {
@@ -42,7 +42,7 @@ export class PlaylistHttpClient {
         return this.http.get(url_, options_).toPromise()
     }
 
-    create(name: string | null | undefined, description: string | null | undefined, lyric: FileParameter | null | undefined, duration: number | undefined, thumbnail: FileParameter | null | undefined, fileMusic: FileParameter | null | undefined, isPublic: boolean | undefined): Promise<any> {
+    create(name: string | null | undefined, description: string | null | undefined, thumbnail: FileParameter | null | undefined): Promise<any> {
         let url_ = this.baseUrl + "/api/v1/Playlist";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -51,20 +51,8 @@ export class PlaylistHttpClient {
             content_.append("Name", name.toString());
         if (description !== null && description !== undefined)
             content_.append("Description", description.toString());
-        if (lyric !== null && lyric !== undefined)
-            content_.append("Lyric", lyric.data, lyric.fileName ? lyric.fileName : "Lyric");
-        if (duration === null || duration === undefined)
-            throw new Error("The parameter 'duration' cannot be null.");
-        else
-            content_.append("Duration", duration.toString());
-        if (thumbnail !== null && thumbnail !== undefined)
+        if (thumbnail.data !== null)
             content_.append("Thumbnail", thumbnail.data, thumbnail.fileName ? thumbnail.fileName : "Thumbnail");
-        if (fileMusic !== null && fileMusic !== undefined)
-            content_.append("FileMusic", fileMusic.data, fileMusic.fileName ? fileMusic.fileName : "FileMusic");
-        if (isPublic === null || isPublic === undefined)
-            throw new Error("The parameter 'isPublic' cannot be null.");
-        else
-            content_.append("IsPublic", isPublic.toString());
 
         let options_ = {
             body: content_,
@@ -73,8 +61,8 @@ export class PlaylistHttpClient {
                 "Accept": "application/json"
             }
         };
-
-        return fetch(url_, options_).then(_response => _response.json())
+        console.log(content_)
+        return this.http.request('post',url_, options_).toPromise()
     }
 
     update(id: number | undefined, name: string | null | undefined, description: string | null | undefined, lyric: FileParameter | null | undefined, duration: number | undefined, isPublic: boolean | undefined, thumbnail: FileParameter | null | undefined, fileMusic: FileParameter | null | undefined, types: number[] | null | undefined, tags: number[] | null | undefined): Promise<any> {
@@ -135,7 +123,7 @@ export class PlaylistHttpClient {
             }
         };
 
-        return fetch(url_, options_).then(_response => _response.json())
+        return this.http.request('delete',url_,options_).toPromise()
     }
 
     getById(id: number | undefined): Promise<any> {

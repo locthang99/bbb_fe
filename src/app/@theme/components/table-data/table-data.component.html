@@ -55,7 +55,7 @@
     <mat-cell *matCellDef="let row" class="col-max-w-10">
       <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onClickRow.emit(row.id)">edit_note</mat-icon>
       <div></div>
-      <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="">delete</mat-icon>
+      <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onDelete(row.id)">delete</mat-icon>
     </mat-cell>
   </ng-container>
 

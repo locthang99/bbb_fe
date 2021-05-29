@@ -5,7 +5,7 @@ export class SortParameter{
     sortASC: boolean | undefined;
     constructor()
     {
-        this.index = 1;
+        this.index = 0;
         this.pageSize = 10;
         this.sortASC = true;
         this.sortBy = "Id"
@@ -27,7 +27,7 @@ export class PagedSortResponse{
     data:[]
     constructor ()
     {
-        this.index = 1;
+        this.index = 0;
         this.pageSize = 0;
         this.totalItem = 0;
         this.data=[]

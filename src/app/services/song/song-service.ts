@@ -7,6 +7,7 @@ import {
 import { HttpClient } from "@angular/common/http";
 import {SortParameter}  from "../dto-base" 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
+
 @Injectable({
     providedIn: 'root',
     })
@@ -17,7 +18,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
         constructor(@Inject(HttpClient) http: HttpClient,@Optional() @Inject(API_BASE_URL) baseUrl?: string) {
             this.http = http;
-            this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:5001";
+            this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : HOST_API;
         }
     
         get(sortParameter :SortParameter): Promise<any> {
@@ -74,7 +75,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
                 }
             };
     
-            return fetch(url_, options_).then(_response => _response.json())
+            return this.http.request('post',url_, options_).toPromise();
         }
     
         update(id: number | undefined, name: string | null | undefined, description: string | null | undefined, lyric: FileParameter | null | undefined, duration: number | undefined, isPublic: boolean | undefined, thumbnail: FileParameter | null | undefined, fileMusic: FileParameter | null | undefined, types: number[] | null | undefined, tags: number[] | null | undefined): Promise<any> {
@@ -135,7 +136,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
                 }
             };
     
-            return fetch(url_, options_).then(_response => _response.json())
+            return this.http.delete(url_,options_).toPromise()
         }
     
         getById(id: number | undefined): Promise<any> {

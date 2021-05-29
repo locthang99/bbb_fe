@@ -1,10 +1,11 @@
 <nb-card>
-  <nb-card-header>
-    Quản lí playlist
-  </nb-card-header>
-  <nb-card-body>
-      <ngx-table-data [services]=service [inputColumns]=cols [placeholderString]=stringInput
-        (onClickRow)=onClickPlaylist($event)>
-      </ngx-table-data>
-  </nb-card-body>
+<nb-card-body>
+  <mat-tab-group mat-align-tabs="end">
+    <mat-tab label="Quản lí playlist"> <ngx-table-data [services]=service [inputColumns]=cols [placeholderString]=stringInput
+      (onClickRow)=onClickPlaylist($event)>
+    </ngx-table-data> </mat-tab>
+    <mat-tab label="Tạo playlist"> <ngx-create-playlist></ngx-create-playlist> </mat-tab>
+    <mat-tab label="Playlist đã xóa"> Content 3 </mat-tab>
+  </mat-tab-group>
+</nb-card-body>
 </nb-card>

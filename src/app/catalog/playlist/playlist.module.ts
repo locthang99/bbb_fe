@@ -5,6 +5,7 @@ import {PlaylistComponent} from './playlist.component'
 import { ThemeModule } from '../../@theme/theme.module';
 import { FormsModule,ReactiveFormsModule  }   from '@angular/forms';
 import {CatalogModule} from "../catalog-module"
+import {MaterialModule} from "../../material-module"
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import {CatalogModule} from "../catalog-module"
     Ng2SmartTableModule,
     FormsModule,
     ReactiveFormsModule,
-    CatalogModule
+    CatalogModule,
+    MaterialModule
     
   ],
   declarations:[

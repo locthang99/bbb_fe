@@ -8,7 +8,7 @@ import { DashboardUserComponent } from './user-dashboard/dashboard-user.componen
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import {SongComponent} from '../catalog/song/song.component'
 import {PlaylistComponent} from '../catalog/playlist/playlist.component'
-import {SongtypeComponent} from '../catalog/songtype/songtype.component'
+import {TypeComponent} from '../catalog/type/type.component'
 import {SongtagComponent} from '../catalog/songtag/songtag.component'
 import {TestComponent} from '../catalog/test/test.component'
 import {AccountComponent} from '../catalog/account/account.component'
@@ -36,8 +36,8 @@ const routes: Routes = [{
       component: PlaylistComponent,
     },
     {
-      path: 'songtype',
-      component: SongtypeComponent,
+      path: 'type',
+      component: TypeComponent,
     },
     {
       path: 'songtag',

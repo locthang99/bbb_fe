@@ -33,7 +33,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Thể loại',
     icon: 'file',
-    link: '/pages/songtype',
+    link: '/pages/type',
   },
   {
     title: 'Tag',
