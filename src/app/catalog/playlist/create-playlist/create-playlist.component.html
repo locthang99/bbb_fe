@@ -1,46 +1,55 @@
-<mat-vertical-stepper linear #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup" class="firstFormGroup">
-      <ng-template matStepLabel>Tạo playlist</ng-template>
+<div class="container">
+  <mat-vertical-stepper linear #stepper class="text-center">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" class="firstFormGroup">
 
-      <!-- Select File -->
-      <mat-label>Ảnh bìa</mat-label>
-      <input type="file" accept="*" (change)="showPreview($event)" />
-      <!-- Image Preview -->
-      <div class="">
-        <img [src]="imageURL" class="imagePreview">
-      </div>
+        <ng-template matStepLabel>Tạo playlist</ng-template>
 
-      <mat-form-field>
-        <mat-label>Tên playlist</mat-label>
-        <input matInput formControlName="name" required>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Mô tả</mat-label>
-        <textarea matInput formControlName="description"></textarea>
-      </mat-form-field>
+        <div class="row justify-content-center">
+          <div class="col-6" style="border-right: 2px solid;">
+            <!-- Select File -->
+            <mat-label for="input">Ảnh bìa</mat-label>
+            <hr>
+            <input #fileImg type="file" accept="*" (change)="showPreview($event)" style="display: none;"/>
+            <!-- Image Preview -->
+            <div class="border border-pwrimary rounded con-img" (click)="pickFile($event)">
+              <img [src]="imageURL" class="imagePreview">
+            </div>
+          </div>
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Tên playlist</mat-label>
+              <input matInput formControlName="name" required>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Mô tả</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <button mat-button (click)="create()">Tạo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+      <ng-template matStepLabel>Thêm bài hát</ng-template>
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab [label]=lang.detail.listSongAdded>
+
+          <ngx-list-song-detail [isSearch]='true' [playlistId]="1"></ngx-list-song-detail>
+
+        </mat-tab>
+        <mat-tab [label]=lang.detail.listSongAdd>
+
+          <ngx-list-song-detail [isSearch]='true' [playlistId]="1"></ngx-list-song-detail>
+
+        </mat-tab>
+      </mat-tab-group>
       <div>
-        <button mat-button (click)="create()">Tạo</button>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-    <ng-template matStepLabel>Thêm bài hát</ng-template>
-    <mat-tab-group mat-stretch-tabs>
-      <mat-tab [label]=lang.detail.listSongAdded>
-
-        <ngx-list-song-detail [isSearch]='true' [playlistId]="1"></ngx-list-song-detail>
-
-      </mat-tab>
-      <mat-tab [label]=lang.detail.listSongAdd>
-
-        <ngx-list-song-detail [isSearch]='true' [playlistId]="1"></ngx-list-song-detail>
-
-      </mat-tab>
-    </mat-tab-group>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-vertical-stepper>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

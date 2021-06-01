@@ -1,5 +1,5 @@
 //import from angular core
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import {FormGroup,FormBuilder,Validators} from "@angular/forms"
 // import from services
 import { SortParameter, PagedSortResponse } from "app/services/dto-base";
@@ -19,6 +19,7 @@ import { lang } from "../../../@language/language";
 })
 export class CreatePlaylistComponent implements OnInit {
  
+
   //public variables
   lang = lang;
   isLoading = true;
@@ -69,6 +70,11 @@ export class CreatePlaylistComponent implements OnInit {
       data: event.target.files[0],
       fileName: event.target.files[0].name,
     };
+
+  }
+  pickFile(e:any)
+  {
+    document.getElementById("fileImg").click();
 
   }
 
