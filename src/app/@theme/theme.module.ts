@@ -25,6 +25,7 @@ import {
   TestCustomComponent,
   TableDataComponent,
   ToastComponent,
+  ConfirmDialogComponent
   
 } from './components';
 import {
@@ -71,6 +72,7 @@ const COMPONENTS = [
   TwoColumnsLayoutComponent,
   TableDataComponent,
   ToastComponent,
+  ConfirmDialogComponent
 ];
 const PIPES = [
   CapitalizePipe,

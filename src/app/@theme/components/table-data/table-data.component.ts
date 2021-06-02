@@ -17,9 +17,12 @@ import { SongHttpClient } from "app/services/song/song-service";
 //import from ui lib
 import { MatSort } from "@angular/material/sort";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import {MatDialog} from "@angular/material/dialog"
 
 // import from component custom
 import { SearchInputComponent } from "../search-input/search-input.component";
+import { ConfirmDialogComponent } from "..//confirm-dialog/confirm-dialog.component";
+
 
 // import from utils
 import { lang } from "../../../@language/language";
@@ -37,6 +40,7 @@ export class TableDataComponent implements OnInit {
   @Input("services") services: any;
   @Input("placeholderString") placeholderString: string;
   @Input("inputColumns") inputColumns: string[];
+  @Input('typeTable') typeTable:string;
   //@ViewChild('input', { static: true }) input: ElementRef;
   @Output() onClickRow: EventEmitter<string> = new EventEmitter<string>();
 
@@ -53,7 +57,7 @@ export class TableDataComponent implements OnInit {
   keyword: string;
   IdSelect: number;
 
-  constructor() {
+  constructor(public dialogService: MatDialog) {
     console.log("init");
     this.dataSource = new PagedSortResponse();
     this.sortParameter = new SortParameter();
@@ -100,8 +104,39 @@ export class TableDataComponent implements OnInit {
 
   onDelete(id:any)
   {
-    this.services.delete(id).then(res=>{
-      this.loaData()
+    let cfnDialog = this.dialogService.open(ConfirmDialogComponent)
+    cfnDialog.componentInstance.msg="Xác nhận xóa?";
+    cfnDialog.componentInstance.onConfirm.subscribe(x=>{
+      this.services.delete(id).then(res=>{
+        cfnDialog.close();
+        this.loaData()
+      })
     })
   }
+
+
+  onStrongDelete(id:any)
+  {
+    let cfnDialog = this.dialogService.open(ConfirmDialogComponent)
+    cfnDialog.componentInstance.msg="Xác nhận xóa vĩnh viến?";
+    cfnDialog.componentInstance.onConfirm.subscribe(x=>{
+      this.services.strongDelete(id).then(res=>{
+        cfnDialog.close();
+        this.loaData()
+      })
+    })
+  }
+
+  onUnDelete(id:any)
+  {
+    let cfnDialog = this.dialogService.open(ConfirmDialogComponent)
+    cfnDialog.componentInstance.msg="Xác nhận khôi phục?";
+    cfnDialog.componentInstance.onConfirm.subscribe(x=>{
+      this.services.unDelete(id).then(res=>{
+        cfnDialog.close();
+        this.loaData()
+      })
+    })
+  }
+
 }

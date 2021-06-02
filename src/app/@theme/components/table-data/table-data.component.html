@@ -51,11 +51,16 @@
   </ng-container>
 
   <ng-container *ngIf="inputColumns.includes('action')" matColumnDef="action">
-    <mat-header-cell *matHeaderCellDef class="col-max-w-10"> {{lang.table.action}} </mat-header-cell>
-    <mat-cell *matCellDef="let row" class="col-max-w-10">
+    <mat-header-cell *matHeaderCellDef class="col-max-w-15"> {{lang.table.action}} </mat-header-cell>
+    <mat-cell class="text-center" *matCellDef="let row" class="col-max-w-15">
       <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onClickRow.emit(row.id)">edit_note</mat-icon>
       <div></div>
-      <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onDelete(row.id)">delete</mat-icon>
+      <mat-icon *ngIf="typeTable!='delete'" style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onDelete(row.id)">delete</mat-icon>
+      <div></div>
+      <mat-icon *ngIf="typeTable=='delete'"  style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onUnDelete(row.id)">undo</mat-icon>
+      <div></div>
+      <mat-icon *ngIf="typeTable=='delete'" style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onStrongDelete(row.id)">delete_forever</mat-icon>
+
     </mat-cell>
   </ng-container>
 

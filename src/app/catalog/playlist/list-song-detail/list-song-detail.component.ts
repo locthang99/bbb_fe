@@ -18,9 +18,12 @@ import { PlaylistHttpClient } from "app/services/playlist/playlist-service";
 //import from ui lib
 import { MatSort } from "@angular/material/sort";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import {MatDialog,MAT_DIALOG_DATA,MatDialogRef} from '@angular/material/dialog';
 
 // import from component custom
 import { SearchInputComponent } from "../../../@theme/components/search-input/search-input.component";
+import { ConfirmDialogComponent } from "../../../@theme/components/confirm-dialog/confirm-dialog.component";
+
 
 // import from utils
 import { lang } from "../../../@language/language";
@@ -29,6 +32,7 @@ import { SongHttpClient } from "app/services/song/song-service";
 @Component({
   selector: "ngx-list-song-detail",
   templateUrl: "./list-song-detail.component.html",
+  styleUrls:["./list-song-detail.component.scss"]
 })
 @Injectable({
   providedIn: 'root',
@@ -58,7 +62,7 @@ export class ListSongDetailComponent implements OnInit {
   keyword: string;
   IdSelect: number;
 
-  constructor(public playlistServices : PlaylistHttpClient,public songServices:SongHttpClient) {
+  constructor(public playlistServices : PlaylistHttpClient,public songServices:SongHttpClient,public dialogService: MatDialog  ) {
     console.log("init");
     this.songs = new PagedSortResponse();
     this.sortParameter = new SortParameter();
@@ -123,8 +127,13 @@ export class ListSongDetailComponent implements OnInit {
   }
   onRemoveSong(songId:number)
   {
-    this.playlistServices.removeSong(this.playlistId,songId).then(res=>{
-      console.log(res)
+    let cfnDialog = this.dialogService.open(ConfirmDialogComponent)
+    cfnDialog.componentInstance.msg="Xóa bài này khỏi playlist?";
+    cfnDialog.componentInstance.onConfirm.subscribe(x=>{
+      this.playlistServices.removeSong(this.playlistId,songId).then(res=>{
+        cfnDialog.close();
+        
+      })
     })
   }
 }
