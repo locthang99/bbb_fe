@@ -221,4 +221,50 @@ export class PlaylistHttpClient {
         return this.http.get(url_, options_).toPromise();
     }
 
+    pushSong(idPlaylist: number | undefined,idSong: number | undefined)
+    {
+        let url_ = this.baseUrl + "/api/v1/Playlist/PushSong?";
+        if (idPlaylist === null)
+            throw new Error("The parameter 'idPlaylist' cannot be null.");
+        else if (idPlaylist !== undefined)
+            url_ += "IdPlaylist=" + encodeURIComponent("" + idPlaylist) + "&";
+        if (idSong === null)
+            throw new Error("The parameter 'idSong' cannot be null.");
+        else if (idSong !== undefined)
+            url_ += "IdSong=" + encodeURIComponent("" + idSong);
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = {
+            method: "POST",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.request('post',url_, options_).toPromise();
+    }
+
+    removeSong(idPlaylist: number | undefined,idSong: number | undefined)
+    {
+        let url_ = this.baseUrl + "/api/v1/Playlist/RemoveSong?";
+        if (idPlaylist === null)
+            throw new Error("The parameter 'idPlaylist' cannot be null.");
+        else if (idPlaylist !== undefined)
+            url_ += "IdPlaylist=" + encodeURIComponent("" + idPlaylist) + "&";
+        if (idSong === null)
+            throw new Error("The parameter 'idSong' cannot be null.");
+        else if (idSong !== undefined)
+            url_ += "IdSong=" + encodeURIComponent("" + idSong);
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = {
+            method: "DELETE",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.request('delete',url_, options_).toPromise();
+    }
+
 }

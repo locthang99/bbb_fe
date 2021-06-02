@@ -33,9 +33,9 @@
   <ng-container matColumnDef="action">
     <mat-header-cell *matHeaderCellDef class="col-max-w-15"> {{lang.table.action}} </mat-header-cell>
     <mat-cell *matCellDef="let row" class="col-max-w-15">
-      <!-- <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onClickRow.emit(row.id)">add</mat-icon>
-      <div></div> -->
-      <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="">delete</mat-icon>
+      <mat-icon *ngIf="isAddSong" style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onPushSong(row.id)">add</mat-icon>
+      <div></div>
+      <mat-icon *ngIf="!isAddSong" style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onRemoveSong(row.id)">delete</mat-icon>
     </mat-cell>
   </ng-container>
 

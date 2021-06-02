@@ -12,13 +12,14 @@ import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 // import from utils
 import { lang } from "../../../@language/language";
+import { MatStep, MatStepper } from "@angular/material/stepper";
 @Component({
   selector: "ngx-create-playlist",
   templateUrl: "./create-playlist.component.html",
   styleUrls: ["./create-playlist.component.scss"],
 })
 export class CreatePlaylistComponent implements OnInit {
- 
+ @ViewChild("stepper") stepper:MatStepper;
 
   //public variables
   lang = lang;
@@ -72,11 +73,6 @@ export class CreatePlaylistComponent implements OnInit {
     };
 
   }
-  pickFile(e:any)
-  {
-    document.getElementById("fileImg").click();
-
-  }
 
   // Submit Form
   create() {
@@ -84,9 +80,13 @@ export class CreatePlaylistComponent implements OnInit {
     let des = this.firstFormGroup.get('description').value
     console.log(name)
     this.playlistService.create(name,des,this.thumbnail).then(res=>{
-      console.log(res)
-      this.playlistIdCreated = res.objectId
-      this.isEditable = true;
+      if(res.code == 200)
+      {
+        this.stepper.next();
+        this.playlistIdCreated = res.objectId
+        this.isEditable = true;
+      }
+
     })
   }
 }

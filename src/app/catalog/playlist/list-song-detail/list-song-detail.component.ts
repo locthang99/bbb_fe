@@ -11,7 +11,7 @@ import {
   Injectable
 } from "@angular/core";
 
-// import from services
+// import from playlistServices
 import { SortParameter, PagedSortResponse } from "app/services/dto-base";
 import { PlaylistHttpClient } from "app/services/playlist/playlist-service";
 
@@ -24,6 +24,7 @@ import { SearchInputComponent } from "../../../@theme/components/search-input/se
 
 // import from utils
 import { lang } from "../../../@language/language";
+import { SongHttpClient } from "app/services/song/song-service";
 
 @Component({
   selector: "ngx-list-song-detail",
@@ -40,6 +41,7 @@ export class ListSongDetailComponent implements OnInit {
   @Input("inputColumns") inputColumns: string[];
   @Input("playlistId") playlistId:number;
   @Input("isSearch") isSearch:boolean;
+  @Input("isAddSong") isAddSong:boolean;
   @ViewChild('input', { static: true }) input: ElementRef;
   @Output() onClickRow: EventEmitter<string> = new EventEmitter<string>();
 
@@ -56,7 +58,7 @@ export class ListSongDetailComponent implements OnInit {
   keyword: string;
   IdSelect: number;
 
-  constructor(public services : PlaylistHttpClient) {
+  constructor(public playlistServices : PlaylistHttpClient,public songServices:SongHttpClient) {
     console.log("init");
     this.songs = new PagedSortResponse();
     this.sortParameter = new SortParameter();
@@ -65,11 +67,7 @@ export class ListSongDetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("init");
-    this.isLoading = true;
-    this.services.getSong(this.playlistId,this.sortParameter).then((res: any) => {
-      this.songs = res;
-      this.isLoading = false;
-    });
+    this.loadSong();
   }
 
   ngAfterViewInit() {
@@ -77,31 +75,56 @@ export class ListSongDetailComponent implements OnInit {
       this.sortParameter.sortBy = this.sort.active;
       this.sort.start = this.sort.start === "asc" ? "desc" : "asc";
       this.sortParameter.sortASC = this.sort.start === "asc" ? true : false;
-      this.isLoading = true;
-      this.services.getSong(this.playlistId,this.sortParameter).then((res: any) => {
-        this.songs = res;
-        this.isLoading = false;
-      });
+      this.loadSong();
     });
   }
 
   onChangePaginator(event: PageEvent) {
-    this.isLoading = true;
+
     this.sortParameter.pageSize = event.pageSize;
     this.sortParameter.index = event.pageIndex;
-    this.services.getSong(this.playlistId,this.sortParameter).then((res: any) => {
-      this.songs = res;
-      this.isLoading = false;
-    });
+    this.loadSong();
   }
 
   onSearch(keyword: any) {
     this.keyword = keyword;
     this.sortParameter = new SortParameter();
+    this.sortParameter.pageSize = 5;
     this.isLoading = true;
-    this.services.getByName(keyword, this.sortParameter).then((res) => {
+    this.songServices.getByName(keyword, this.sortParameter).then((res) => {
       this.songs = res;
       this.isLoading = false;
     });
+  }
+  loadSong()
+  {
+    if(this.isAddSong)
+    {
+      this.isLoading = true;
+      this.songServices.getByName("", this.sortParameter).then((res) => {
+        this.songs = res;
+        this.isLoading = false;
+      });
+    }
+    else
+    {
+      this.isLoading = true;
+      this.playlistServices.getSong(this.playlistId,this.sortParameter).then((res: any) => {
+        this.songs = res;
+        this.isLoading = false;
+      });
+    }
+  }
+  onPushSong(songId:number)
+  {
+    this.playlistServices.pushSong(this.playlistId,songId).then(res=>{
+      console.log(res)
+    })
+  }
+  onRemoveSong(songId:number)
+  {
+    this.playlistServices.removeSong(this.playlistId,songId).then(res=>{
+      console.log(res)
+    })
   }
 }
