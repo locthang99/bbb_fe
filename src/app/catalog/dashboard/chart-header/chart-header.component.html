@@ -1,0 +1,8 @@
+<div class="row">
+        <nb-toggle status="info" style="margin-top: 5px; margin-right: 5px;" [checked]="isLineChart"
+        labelPosition="left" (checkedChange)=selectShape($event)>
+                Line</nb-toggle>
+        <nb-select matNativeControl (selectedChange)="selectChart($event)" [selected]="defaultChart">
+                <nb-option *ngFor="let option of optionChart" [value]="option.value">{{ option.viewValue }}</nb-option>
+        </nb-select>
+</div>

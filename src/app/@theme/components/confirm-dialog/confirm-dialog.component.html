@@ -1,7 +1,9 @@
-<mat-dialog-content>
+
+  <mat-dialog-content style="width: 300px; height: 100px;">
     {{msg}}
   </mat-dialog-content>
-  <mat-dialog-actions>
+  <mat-dialog-actions style="float: right;">
     <button mat-button (click)=onConfirm.emit()>OK</button>
     <button mat-button mat-dialog-close>Hủy</button>
   </mat-dialog-actions>
+

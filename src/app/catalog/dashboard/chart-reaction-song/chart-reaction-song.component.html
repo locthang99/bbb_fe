@@ -1,0 +1,6 @@
+
+<ngx-chart-header style="top: 0;right: 10px;z-index: 10;position: absolute;" (onChangeShape)=onChangeShape($event) (onChangeTime)=onChangeTime($event) ></ngx-chart-header>
+<div echarts [options]="options" [loading]="isLoading" class="echart" (chartInit)="onChartInit($event)" ></div>
+
+
+

@@ -1,0 +1,14 @@
+<nb-card>
+  <nb-card-body>
+    <mat-tab-group mat-align-tabs="end">
+      <mat-tab label="Quản lí tag">
+        <ngx-table-data [services]=service [inputColumns]=cols [placeholderString]=stringInput
+          (onClickRow)=onClickTag($event)>
+        </ngx-table-data>
+      </mat-tab>
+      <mat-tab label="Tạo tag"> <ngx-create-tag></ngx-create-tag> </mat-tab>
+      <mat-tab label="Thể loại đã xóa"> <ngx-table-data [services]=service [inputColumns]=cols [placeholderString]=stringInput
+        (onClickRow)=onClickTag($event) typeTable='delete'></ngx-table-data> </mat-tab>
+    </mat-tab-group>
+  </nb-card-body>
+</nb-card>

@@ -38,7 +38,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Tag',
     icon: 'bookmark-outline',
-    link: '/pages/songtag',
+    link: '/pages/tag',
   },
   {
     title: 'QUẢN LÍ NGƯỜI DÙNG',

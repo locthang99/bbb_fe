@@ -1,12 +1,14 @@
 <nb-card>
   <nb-card-body>
     <mat-tab-group mat-align-tabs="end">
-      <mat-tab label="Quản lí bài hát">
+      <mat-tab label="Quản lí thể loại">
         <ngx-table-data [services]=service [inputColumns]=cols [placeholderString]=stringInput
-          (onClickRow)=onClickSong($event)>
+          (onClickRow)=onClickType($event)>
         </ngx-table-data>
       </mat-tab>
-      <mat-tab label="Bài hát đã xóa"> Content 3 </mat-tab>
+      <mat-tab label="Tạo thể loại"> <ngx-create-type></ngx-create-type> </mat-tab>
+      <mat-tab label="Thể loại đã xóa"> <ngx-table-data [services]=service [inputColumns]=cols [placeholderString]=stringInput
+        (onClickRow)=onClickType($event) typeTable='delete'></ngx-table-data> </mat-tab>
     </mat-tab-group>
   </nb-card-body>
 </nb-card>

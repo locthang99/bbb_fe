@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { UsersClient } from "app/service/Account/AccountService";
+import { AdminHttpClient } from "app/services/auth/auth-service";
 import { parseDatetime } from "../common/conmmon";
 @Component({
   templateUrl: "profile.component.html",
@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   user:any
 
   constructor(
-    private authenticationService: UsersClient
+    private authenticationService: AdminHttpClient
   ) {
     
     // redirect to home if already logged in
@@ -24,12 +24,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authenticationService.getCurrentUser().subscribe((res: any) => {
-      if (res.status == 200) {
-        this.user=res.data.data;
-        this.user.dob = parseDatetime(this.user.dob)
-      } 
-    });
+    // this.authenticationService.getCurrentUser().subscribe((res: any) => {
+    //   if (res.status == 200) {
+    //     this.user=res.data.data;
+    //     this.user.dob = parseDatetime(this.user.dob)
+    //   } 
+    // });
 
   }
 }

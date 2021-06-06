@@ -138,6 +138,8 @@ export class OrdersChartComponent implements AfterViewInit, OnDestroy, OnChanges
       
       ],
     };
+    console.log("oppp")
+    console.log(this.option)
   }
 
   getFirstLine(eTheme) {

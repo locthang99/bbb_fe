@@ -2,14 +2,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from '../catalog/dashboard/dashboard.commponent'
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
-import { DashboardUserComponent } from './user-dashboard/dashboard-user.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import {SongComponent} from '../catalog/song/song.component'
 import {PlaylistComponent} from '../catalog/playlist/playlist.component'
 import {TypeComponent} from '../catalog/type/type.component'
-import {SongtagComponent} from '../catalog/songtag/songtag.component'
+import {TagComponent} from '../catalog/tag/tag.component'
 import {TestComponent} from '../catalog/test/test.component'
 import {AccountComponent} from '../catalog/account/account.component'
 import {ProfileComponent} from '../catalog/profile/profile.component'
@@ -21,11 +20,11 @@ const routes: Routes = [{
   children: [
     {
       path: 'dashboard',
-      component: ECommerceComponent,
+      component: DashboardComponent,
     },
     {
-      path: 'user-dashboard',
-      component: DashboardUserComponent,
+      path: 'dashboard2',
+      component: ECommerceComponent,
     },
     {
       path: 'song',
@@ -40,8 +39,8 @@ const routes: Routes = [{
       component: TypeComponent,
     },
     {
-      path: 'songtag',
-      component: SongtagComponent,
+      path: 'tag',
+      component: TagComponent,
     },
     {
       path: 'account',

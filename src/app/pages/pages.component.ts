@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { MENU_ITEMS } from './pages-menu';
-import { UsersClient } from "app/service/Account/AccountService";
+import { AdminHttpClient } from "app/services/auth/auth-service";
 import { Router } from "@angular/router";
 @Component({
   selector: 'ngx-pages',
@@ -16,7 +16,7 @@ import { Router } from "@angular/router";
 export class PagesComponent {
 
   constructor(
-    private auth:UsersClient,
+    private auth:AdminHttpClient,
     private router: Router,
   ) {
     // this.auth.getCurrentUser().subscribe((res:any)=>{

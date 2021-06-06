@@ -30,8 +30,8 @@ export class TypeComponent implements OnInit {
   service:any;
 
   //table data
-  cols = ['id','thumbnail','name','dateCreate','action']
-  stringInput = lang.searchBar.placeHolerderSong
+  cols = ['id','thumbnail','name','owner','dateCreate','action']
+  stringInput = lang.searchBar.placeHolerderType
 
   constructor(public typeService: TypeHttpClient,public songDetailDialog : MatDialog) {
     this.service = typeService
@@ -39,7 +39,7 @@ export class TypeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onClickSong(songId:any)
+  onClickType(songId:any)
   {
     this.typeService.getById(songId).then(res=>{
       // this.songDetailDialog.open(SongDetailDialogComponent,{data:res.data})

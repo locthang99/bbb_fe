@@ -42,6 +42,7 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
       .pipe(takeWhile(() => this.alive))
       .subscribe(config => {
         const eTheme: any = config.variables.profit;
+        console.log(config)
 
         this.setOptions(eTheme);
       });
@@ -189,6 +190,7 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
   }
 
   getNewSeries(series, data: number[][]) {
+    console.log(series)
     return series.map((line, index) => {
       return {
         ...line,
@@ -214,4 +216,5 @@ export class ProfitChartComponent implements AfterViewInit, OnDestroy, OnChanges
   ngOnDestroy(): void {
     this.alive = false;
   }
+  
 }

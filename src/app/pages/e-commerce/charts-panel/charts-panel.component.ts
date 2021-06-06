@@ -5,7 +5,7 @@ import { OrdersChartComponent } from './charts/orders-chart.component';
 import { ProfitChartComponent } from './charts/profit-chart.component';
 import { OrdersChart } from '../../../@core/data/orders-chart';
 import { ProfitChart } from '../../../@core/data/profit-chart';
-import {DashboardsClient} from '../../../service/Dashboard/DashboardService'
+import {DashboardHttpClient} from '../../../services/dashboard/dashboard-service'
 import { OrderProfitChartSummary, OrdersProfitChartData } from '../../../@core/data/orders-profit-chart';
 
 @Component({
@@ -25,7 +25,7 @@ export class ECommerceChartsPanelComponent implements OnDestroy {
   @ViewChild('ordersChart', { static: true }) ordersChart: OrdersChartComponent;
   @ViewChild('profitChart', { static: true }) profitChart: ProfitChartComponent;
 
-  constructor(private ordersProfitChartService: OrdersProfitChartData, private dashboardsClient:DashboardsClient) {
+  constructor(private ordersProfitChartService: OrdersProfitChartData, private dashboardsClient:DashboardHttpClient) {
     
     // this.ordersProfitChartService.getOrderProfitChartSummary()
     //   .pipe(takeWhile(() => this.alive))
@@ -34,10 +34,10 @@ export class ECommerceChartsPanelComponent implements OnDestroy {
         
     //   });
 
-    this.dashboardsClient.getTotalPlaylist().subscribe((res:any)=>{
+    this.dashboardsClient.getTotalPlaylist().then((res:any)=>{
 
       var data = new Array()
-      res.data.data.forEach(x=>data.push({title:x.title,value:+x.value}))
+      res.data.forEach(x=>data.push({title:x.title,value:+x.value}))
 
       this.chartPanelSummary=data.reverse();
 
@@ -70,17 +70,16 @@ export class ECommerceChartsPanelComponent implements OnDestroy {
         //this.ordersChartData = ordersChartData;
         //console.log(ordersChartData)
         this.dashboardsClient.getAll(period)
-    .pipe(takeWhile(() => this.alive))
-    .subscribe((res:any)=>{
+    .then((res:any)=>{
       var arrLabel = new Array()
-      res.data.data.forEach(x=>arrLabel.push(x.title))
+      res.data.forEach(x=>arrLabel.push(x.title))
       
 
       var arrLike = new Array()
       var arrCmt = new Array()
       var arrListen = new Array()
       var arrDownload = new Array()
-      res.data.data.forEach(x=>{
+      res.data.forEach(x=>{
         arrLike.push(+x.like);
         arrCmt.push(+x.cmt);
         arrListen.push(+x.listen);
@@ -104,17 +103,16 @@ export class ECommerceChartsPanelComponent implements OnDestroy {
         //this.profitChartData = profitChartData;
         console.log('pro',profitChartData)
         this.dashboardsClient.getAll(period)
-    .pipe(takeWhile(() => this.alive))
-    .subscribe((res:any)=>{
+    .then((res:any)=>{
       var arrLabel = new Array()
-      res.data.data.forEach(x=>arrLabel.push(x.title))
+      res.data.forEach(x=>arrLabel.push(x.title))
       
 
       var arrLike = new Array()
       var arrCmt = new Array()
       var arrListen = new Array()
       var arrDownload = new Array()
-      res.data.data.forEach(x=>{
+      res.data.forEach(x=>{
         arrLike.push(+x.like);
         arrCmt.push(+x.cmt);
         arrListen.push(+x.listen);

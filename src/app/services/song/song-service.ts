@@ -1,4 +1,4 @@
-import { FileResponse, FileParameter, SwaggerResponse, HOST_API, ApiException } from "../service-base"
+import { FileResponse, FileParameter, SwaggerResponse, HOST_API, ApiException,ServiceBaseHttpClient } from "../service-base"
 import { Injectable,InjectionToken,Inject,Optional} from '@angular/core';
 import {
     CommentCommand
@@ -11,40 +11,15 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 @Injectable({
     providedIn: 'root',
     })
-    export class SongHttpClient {
-        private http: HttpClient;
-        private baseUrl: string;
-        protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-    
+    export class SongHttpClient extends ServiceBaseHttpClient {
+
+        protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;   
         constructor(@Inject(HttpClient) http: HttpClient,@Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-            this.http = http;
-            this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : HOST_API;
-        }
-    
-        get(sortParameter :SortParameter): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song?";
-            if (sortParameter.index !== undefined)
-                url_ += "Index=" + encodeURIComponent("" + sortParameter.index) + "&";
-            if (sortParameter.pageSize !== undefined)
-                url_ += "PageSize=" + encodeURIComponent("" + sortParameter.pageSize) + "&";
-            if (sortParameter.sortBy !== undefined && sortParameter.sortBy !== null)
-                url_ += "SortBy=" + encodeURIComponent("" + sortParameter.sortBy) + "&";
-            if (sortParameter.sortASC !== undefined)
-                url_ += "SortASC=" + encodeURIComponent("" + sortParameter.sortASC) + "&";
-            url_ = url_.replace(/[?&]$/, "");
-    
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json"
-                }
-            };
-            
-            return this.http.get(url_,options_).toPromise()
-        }   
+            super(http,"Song");
+        } 
     
         create(name: string | null | undefined, description: string | null | undefined, lyric: FileParameter | null | undefined, duration: number | undefined, thumbnail: FileParameter | null | undefined, fileMusic: FileParameter | null | undefined, isPublic: boolean | undefined): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song";
+            let url_ = this.basePrefix + "";
             url_ = url_.replace(/[?&]$/, "");
     
             const content_ = new FormData();
@@ -79,7 +54,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
         }
     
         update(id: number | undefined, name: string | null | undefined, description: string | null | undefined, lyric: FileParameter | null | undefined, duration: number | undefined, isPublic: boolean | undefined, thumbnail: FileParameter | null | undefined, fileMusic: FileParameter | null | undefined, types: number[] | null | undefined, tags: number[] | null | undefined): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song?";
+            let url_ = this.basePrefix + "?";
             if (id === null)
                 throw new Error("The parameter 'id' cannot be null.");
             else if (id !== undefined)
@@ -119,97 +94,10 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
             };
     
             return fetch(url_, options_).then(_response => _response.json())
-        }
-    
-        delete(id: number | undefined): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song?";
-            if (id === null)
-                throw new Error("The parameter 'id' cannot be null.");
-            else if (id !== undefined)
-                url_ += "Id=" + encodeURIComponent("" + id) + "&";
-            url_ = url_.replace(/[?&]$/, "");
-    
-            let options_ = {
-                method: "DELETE",
-                headers: {
-                    "Accept": "application/json"
-                }
-            };
-    
-            return this.http.delete(url_,options_).toPromise()
-        }
-    
-        getById(id: number | undefined): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/ById?";
-            if (id === null)
-                throw new Error("The parameter 'id' cannot be null.");
-            else if (id !== undefined)
-                url_ += "Id=" + encodeURIComponent("" + id) + "&";
-            url_ = url_.replace(/[?&]$/, "");
-    
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json"
-                }
-            };
-    
-            return fetch(url_, options_).then(_response => _response.json())
-        }
-
-    
-        getByListId(listId: number[] | null | undefined, sortParameter :SortParameter): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/ByListId?";
-            if (listId !== undefined && listId !== null)
-                listId && listId.forEach(item => { url_ += "listId=" + encodeURIComponent("" + item) + "&"; });
-             if (sortParameter.index !== undefined)
-                url_ += "Index=" + encodeURIComponent("" + sortParameter.index) + "&";
-            if (sortParameter.pageSize !== undefined)
-                url_ += "PageSize=" + encodeURIComponent("" + sortParameter.pageSize) + "&";
-            if (sortParameter.sortBy !== undefined && sortParameter.sortBy !== null)
-                url_ += "SortBy=" + encodeURIComponent("" + sortParameter.sortBy) + "&";
-            if (sortParameter.sortASC !== undefined)
-                url_ += "SortASC=" + encodeURIComponent("" + sortParameter.sortASC) + "&";
-            url_ = url_.replace(/[?&]$/, "");
-    
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json"
-                }
-            };
-    
-            return fetch(url_, options_).then(_response => _response.json())
-        }
-    
-    
-        getByName(name: string | null | undefined, sortParameter :SortParameter): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/ByName?";
-            if (name !== undefined && name !== null)
-                url_ += "Name=" + encodeURIComponent("" + name) + "&";
-             if (sortParameter.index !== undefined)
-                url_ += "Index=" + encodeURIComponent("" + sortParameter.index) + "&";
-            if (sortParameter.pageSize !== undefined)
-                url_ += "PageSize=" + encodeURIComponent("" + sortParameter.pageSize) + "&";
-            if (sortParameter.sortBy !== undefined && sortParameter.sortBy !== null)
-                url_ += "SortBy=" + encodeURIComponent("" + sortParameter.sortBy) + "&";
-            if (sortParameter.sortASC !== undefined)
-                url_ += "SortASC=" + encodeURIComponent("" + sortParameter.sortASC) + "&";
-            url_ = url_.replace(/[?&]$/, "");
-    
-            let options_ = {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json"
-                }
-            };
-    
-            return fetch(url_, options_).then(_response => _response.json())
-        }
-    
+        }    
     
         getMySong(sortParameter :SortParameter): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/MySong?";
+            let url_ = this.basePrefix + "/MySong?";
              if (sortParameter.index !== undefined)
                 url_ += "Index=" + encodeURIComponent("" + sortParameter.index) + "&";
             if (sortParameter.pageSize !== undefined)
@@ -232,7 +120,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
     
         getComment(songId: number | undefined, sortParameter :SortParameter): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/Comment?";
+            let url_ = this.basePrefix + "/Comment?";
             if (songId === null)
                 throw new Error("The parameter 'songId' cannot be null.");
             else if (songId !== undefined)
@@ -259,7 +147,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
     
         comment(rq: CommentCommand): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/Comment";
+            let url_ = this.basePrefix + "/Comment";
             url_ = url_.replace(/[?&]$/, "");
     
             const content_ = JSON.stringify(rq);
@@ -278,7 +166,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
     
         checkLike(songId: number | undefined): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/CheckLike?";
+            let url_ = this.basePrefix + "/CheckLike?";
             if (songId === null)
                 throw new Error("The parameter 'songId' cannot be null.");
             else if (songId !== undefined)
@@ -297,7 +185,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
     
         listen(songId: number | undefined, userId: number | undefined): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/Listen?";
+            let url_ = this.basePrefix + "/Listen?";
             if (songId === null)
                 throw new Error("The parameter 'songId' cannot be null.");
             else if (songId !== undefined)
@@ -320,7 +208,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
     
         predict(id: number | undefined, isVN: boolean | undefined): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/Predict?";
+            let url_ = this.basePrefix + "/Predict?";
             if (id === null)
                 throw new Error("The parameter 'id' cannot be null.");
             else if (id !== undefined)
@@ -343,7 +231,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
     
         updateType(songId: number, typeId: number): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/{SongId}/UpdateType/{TypeId}";
+            let url_ = this.basePrefix + "/{SongId}/UpdateType/{TypeId}";
             if (songId === undefined || songId === null)
                 throw new Error("The parameter 'songId' must be defined.");
             url_ = url_.replace("{SongId}", encodeURIComponent("" + songId));
@@ -364,7 +252,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
     
         updateTag(songId: number, tagId: number): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/{SongId}/UpdateTag/{TagId}";
+            let url_ = this.basePrefix + "/{SongId}/UpdateTag/{TagId}";
             if (songId === undefined || songId === null)
                 throw new Error("The parameter 'songId' must be defined.");
             url_ = url_.replace("{SongId}", encodeURIComponent("" + songId));
@@ -385,7 +273,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
     
         updateComposer(songId: number, composerId: number): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/{SongId}/UpdateComposer/{ComposerId}";
+            let url_ = this.basePrefix + "/{SongId}/UpdateComposer/{ComposerId}";
             if (songId === undefined || songId === null)
                 throw new Error("The parameter 'songId' must be defined.");
             url_ = url_.replace("{SongId}", encodeURIComponent("" + songId));
@@ -406,7 +294,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
     
         updateSinger(songId: number, singerId: number): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/{SongId}/UpdateSinger/{SingerId}";
+            let url_ = this.basePrefix + "/{SongId}/UpdateSinger/{SingerId}";
             if (songId === undefined || songId === null)
                 throw new Error("The parameter 'songId' must be defined.");
             url_ = url_.replace("{SongId}", encodeURIComponent("" + songId));
@@ -427,7 +315,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
     
         reaction(idSong: number | undefined, like: boolean | undefined): Promise<any> {
-            let url_ = this.baseUrl + "/api/v1/Song/Reaction?";
+            let url_ = this.basePrefix + "/Reaction?";
             if (idSong === null)
                 throw new Error("The parameter 'idSong' cannot be null.");
             else if (idSong !== undefined)

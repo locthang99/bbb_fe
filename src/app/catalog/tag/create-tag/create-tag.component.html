@@ -1,0 +1,27 @@
+<div class="container">
+  <mat-vertical-stepper linear #stepper >
+    <mat-step [stepControl]="firstFormGroup" [editable]="!isEditable">
+      <form [formGroup]="firstFormGroup" class="firstFormGroup">
+
+        <ng-template matStepLabel>Tạo tag</ng-template>
+
+        <div class="row justify-content-center" style="width: 100%;">
+          <div class="col-3 flex-row">
+            <mat-form-field class="p-2">
+              <mat-label>Tên tag</mat-label>
+              <input matInput formControlName="name" required>
+            </mat-form-field>
+            <mat-form-field class="p-2">
+              <mat-label>Mô tả</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <button (click)="create()" class="btn btn-primary">Tạo</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

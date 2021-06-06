@@ -6,7 +6,6 @@ import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import {UsersClient} from "../../../service/Account/AccountService"
 
 @Component({
   selector: 'ngx-header',
@@ -48,7 +47,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private userService: UserData,
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
-              private auth : UsersClient
               ) {
                 // this.auth.getCurrentUser().subscribe((res:any)=>{
                 //   if(res.status==200)

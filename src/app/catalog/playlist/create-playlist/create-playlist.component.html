@@ -38,14 +38,14 @@
     <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
       <ng-template matStepLabel>Thêm bài hát</ng-template>
       <mat-tab-group mat-stretch-tabs>
-        <mat-tab [label]=lang.detail.listSongAdded>
-
-          <ngx-list-song-detail [isSearch]='true' [playlistId]="1"></ngx-list-song-detail>
-
-        </mat-tab>
         <mat-tab [label]=lang.detail.listSongAdd>
 
-          <ngx-list-song-detail [isSearch]='true' [playlistId]="1"></ngx-list-song-detail>
+          <ngx-list-song-detail [isAddSong]='true' [isSearch]='true' [playlistId]="1"></ngx-list-song-detail>
+
+        </mat-tab>
+        <mat-tab [label]=lang.detail.listSongAdded>
+
+          <ngx-list-song-detail [isAddSong]='false' [isSearch]='true' [playlistId]="1"></ngx-list-song-detail>
 
         </mat-tab>
       </mat-tab-group>

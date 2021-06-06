@@ -58,27 +58,31 @@ export class TableDataComponent implements OnInit {
   IdSelect: number;
 
   constructor(public dialogService: MatDialog) {
-    console.log("init");
     this.dataSource = new PagedSortResponse();
     this.sortParameter = new SortParameter();
   }
 
   ngOnInit(): void {
-    console.log("init");
-    this.isLoading = true;
-    this.services.getByName(this.keyword,this.sortParameter).then((res: any) => {
-      this.dataSource = res;
-      this.isLoading = false;
-    });
+    this.loadData()
   }
   
-  loaData()
+  loadData()
   {
     this.isLoading = true;
-    this.services.getByName(this.keyword,this.sortParameter).then((res: any) => {
-      this.dataSource = res;
-      this.isLoading = false;
-    });
+    if(this.typeTable!=="delete")
+    {
+      this.services.getByName(this.keyword,this.sortParameter).then((res: any) => {
+        this.dataSource = res;
+        this.isLoading = false;
+      });
+    }
+    else
+    {
+      this.services.getListDeleted(this.keyword,this.sortParameter).then((res: any) => {
+        this.dataSource = res;
+        this.isLoading = false;
+      });
+    }
   }
 
   ngAfterViewInit() {
@@ -86,20 +90,20 @@ export class TableDataComponent implements OnInit {
       this.sortParameter.sortBy = this.sort.active;
       this.sort.start = this.sort.start === "asc" ? "desc" : "asc";
       this.sortParameter.sortASC = this.sort.start === "asc" ? true : false;
-      this.loaData()
+      this.loadData()
     });
   }
 
   onChangePaginator(event: PageEvent) {
     this.sortParameter.pageSize = event.pageSize;
     this.sortParameter.index = event.pageIndex;
-    this.loaData()
+    this.loadData()
   }
 
   onSearch(keyword: any) {
     this.keyword = keyword;
     this.sortParameter = new SortParameter();
-    this.loaData()
+    this.loadData()
   }
 
   onDelete(id:any)
@@ -109,7 +113,7 @@ export class TableDataComponent implements OnInit {
     cfnDialog.componentInstance.onConfirm.subscribe(x=>{
       this.services.delete(id).then(res=>{
         cfnDialog.close();
-        this.loaData()
+        this.loadData()
       })
     })
   }
@@ -122,7 +126,7 @@ export class TableDataComponent implements OnInit {
     cfnDialog.componentInstance.onConfirm.subscribe(x=>{
       this.services.strongDelete(id).then(res=>{
         cfnDialog.close();
-        this.loaData()
+        this.loadData()
       })
     })
   }
@@ -134,7 +138,7 @@ export class TableDataComponent implements OnInit {
     cfnDialog.componentInstance.onConfirm.subscribe(x=>{
       this.services.unDelete(id).then(res=>{
         cfnDialog.close();
-        this.loaData()
+        this.loadData()
       })
     })
   }

@@ -2,7 +2,9 @@
 export const lang ={
     searchBar:{
         placeHolerderSong:"Tên hoặc Id bài hát để tìm kiếm",
-        placeHolerderPlaylist:"",
+        placeHolerderPlaylist:"Tên hoặc Id playlist để tìm kiếm",
+        placeHolerderType:"Tên hoặc Id thể loại để tìm kiếm",
+        placeHolerderTag:"Tên hoặc Id tag để tìm kiếm"
     },
     table:{
         id:"Id",

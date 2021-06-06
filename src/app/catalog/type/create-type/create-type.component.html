@@ -1,0 +1,58 @@
+<div class="container">
+  <mat-vertical-stepper linear #stepper >
+    <mat-step [stepControl]="firstFormGroup" [editable]="!isEditable">
+      <form [formGroup]="firstFormGroup" class="firstFormGroup">
+
+        <ng-template matStepLabel>Tạo type</ng-template>
+
+        <div class="row justify-content-center" style="width: 100%;">
+          <div class="col-2" style="border-right: 2px solid;">
+            <!-- Select File -->
+            <mat-label for="input">Ảnh bìa</mat-label>
+            <hr>
+            <input #fileImg type="file" accept="*" (change)="showPreview($event)" style="display: none;"/>
+            <!-- Image Preview -->
+            <div class="border border-pwrimary rounded con-img d-flex justify-content-center" (click)="fileImg.click()">
+              <div *ngIf="imageURL==null" class="align-self-center">
+                <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="">edit_note</mat-icon>
+              </div>
+              <img *ngIf="imageURL!==null" [src]="imageURL" class="imagePreview">
+            </div>
+          </div>
+          <div class="col-3 flex-row">
+            <mat-form-field class="p-2">
+              <mat-label>Tên type</mat-label>
+              <input matInput formControlName="name" required>
+            </mat-form-field>
+            <mat-form-field class="p-2">
+              <mat-label>Mô tả</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div>
+          <button (click)="create()" class="btn btn-primary">Tạo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+      <ng-template matStepLabel>Thêm bài hát</ng-template>
+      <!-- <mat-tab-group mat-stretch-tabs>
+        <mat-tab [label]=lang.detail.listSongAdd>
+
+          <ngx-list-song-detail [isAddSong]='true' [isSearch]='true' [typeId]="1"></ngx-list-song-detail>
+
+        </mat-tab>
+        <mat-tab [label]=lang.detail.listSongAdded>
+
+          <ngx-list-song-detail [isAddSong]='false' [isSearch]='true' [typeId]="1"></ngx-list-song-detail>
+
+        </mat-tab>
+      </mat-tab-group> -->
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

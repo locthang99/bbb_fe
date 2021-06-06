@@ -11,7 +11,11 @@ export class TrafficBackCardComponent implements OnDestroy {
 
   private alive = true;
 
-  @Input() trafficBarData: any;
+  @Input() trafficBarData: {
+    data: number[];
+    labels: string[];
+    formatter: "";
+  };
 
   currentTheme: string;
 

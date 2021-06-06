@@ -11,7 +11,7 @@
       </mat-tab>
       <mat-tab label="Bài hát đã xóa">
         <ngx-table-data [services]=service [inputColumns]=cols [placeholderString]=stringInput
-          (onClickRow)=onClickSong($event)>
+          (onClickRow)=onClickSong($event) typeTable='delete'>
         </ngx-table-data>
       </mat-tab>
 

@@ -53,20 +53,20 @@
   <ng-container *ngIf="inputColumns.includes('action')" matColumnDef="action">
     <mat-header-cell *matHeaderCellDef class="col-max-w-15"> {{lang.table.action}} </mat-header-cell>
     <mat-cell class="text-center" *matCellDef="let row" class="col-max-w-15">
-      <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onClickRow.emit(row.id)">edit_note</mat-icon>
+      <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="Edit" (click)="onClickRow.emit(row.id)">edit_note</mat-icon>
       <div></div>
-      <mat-icon *ngIf="typeTable!='delete'" style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onDelete(row.id)">delete</mat-icon>
+      <mat-icon *ngIf="typeTable!='delete'" style="cursor: pointer;" aria-hidden="false" aria-label="Delete" (click)="onDelete(row.id)">delete</mat-icon>
       <div></div>
-      <mat-icon *ngIf="typeTable=='delete'"  style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onUnDelete(row.id)">undo</mat-icon>
+      <mat-icon *ngIf="typeTable=='delete'"  style="cursor: pointer;" aria-hidden="false" aria-label="UnDelete" (click)="onUnDelete(row.id)">restart_alt</mat-icon>
       <div></div>
-      <mat-icon *ngIf="typeTable=='delete'" style="cursor: pointer;" aria-hidden="false" aria-label="" (click)="onStrongDelete(row.id)">delete_forever</mat-icon>
+      <mat-icon *ngIf="typeTable=='delete'" style="cursor: pointer;" aria-hidden="false" aria-label="Delete" (click)="onStrongDelete(row.id)">delete_forever</mat-icon>
 
     </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef=inputColumns>
   </mat-header-row>
-  <mat-row *matRowDef="let row; columns: inputColumns">
+  <mat-row *matRowDef="let row; columns: inputColumns; sticky: true">
   </mat-row>
 </mat-table>
 <h3 class="text-center" *ngIf="dataSource.data.length === 0">No records found</h3>
