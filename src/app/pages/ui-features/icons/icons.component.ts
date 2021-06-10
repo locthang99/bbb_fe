@@ -35,7 +35,7 @@ export class IconsComponent {
       'settings', 'wrench', 'hammer', 'edit', 'trash-a', 'trash-b',
       'document', 'document-text', 'clipboard', 'scissors', 'funnel',
       'bookmark', 'email', 'email-unread', 'folder', 'filing', 'archive',
-      'reply', 'reply-all', 'forward',
+      'reply', 'reply-all', 'forward'
     ],
 
     fontAwesome: [

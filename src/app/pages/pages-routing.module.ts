@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from '../catalog/dashboard/dashboard.commponent'
+import {DashboardUserComponent} from '../catalog/dashboard-user/dashboard-user.commponent'
+import {DeeplearningComponent} from '../catalog/deeplearning/deeplearning.component'
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import {SongComponent} from '../catalog/song/song.component'
@@ -21,6 +23,14 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       component: DashboardComponent,
+    },
+    {
+      path: 'dashboard-user',
+      component: DashboardUserComponent,
+    },
+    {
+      path: 'deeplearning',
+      component: DeeplearningComponent,
     },
     {
       path: 'dashboard2',

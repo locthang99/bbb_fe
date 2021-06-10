@@ -1,21 +1,23 @@
+
 <div class="row">
     <div class="col-xxl-4">
         <nb-card>
-            <ngx-chart-system-info></ngx-chart-system-info>
+            <ngx-chart-type></ngx-chart-type>
         </nb-card>
-        <!-- <ngx-traffic-reveal-card></ngx-traffic-reveal-card> -->
     </div>
 
     <div class="col-xxl-8">
         <nb-card>
-            <mat-tab-group mat-align-tabs="center">
-                <mat-tab label="Bài hát">
-                    <ngx-chart-reaction-song></ngx-chart-reaction-song>
-                </mat-tab>
-                <mat-tab label="Playlist">
-                    <ngx-chart-reaction-song></ngx-chart-reaction-song>
-                </mat-tab>
-            </mat-tab-group>
+            <ngx-chart-reaction-song></ngx-chart-reaction-song>
+
         </nb-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xxl-8">
+        <ngx-chart-new-song></ngx-chart-new-song>
+    </div>
+    <div class="col-xxl-4">
+        <ngx-chart-system-info></ngx-chart-system-info>
     </div>
 </div>

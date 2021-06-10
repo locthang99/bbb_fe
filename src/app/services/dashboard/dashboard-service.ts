@@ -62,7 +62,40 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
             return this.http.get(url_,options_).toPromise();
 
         }
+
+        getTotalType(): Promise<any> {
+            let url_ = this.basePrefix + "/TotalType?";
+            url_ = url_.replace(/[?&]$/, "");
     
+            let options_ : {
+                observe: "response",
+                responseType: "json",
+                headers: {
+                    "Accept": "application/json"
+                }
+            };
+    
+            return this.http.get(url_,options_).toPromise();
+
+        }
+    
+        getTotalRole(): Promise<any> {
+            let url_ = this.basePrefix + "/TotalRole?";
+            url_ = url_.replace(/[?&]$/, "");
+    
+            let options_ : {
+                observe: "response",
+                responseType: "json",
+                headers: {
+                    "Accept": "application/json"
+                }
+            };
+    
+            return this.http.get(url_,options_).toPromise();
+
+        }
+
+
         getAll(type: string | null | undefined): Promise<any> {
             let url_ = this.basePrefix + "/ChartAll?";
             if (type !== undefined && type !== null)

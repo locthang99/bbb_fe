@@ -1,9 +1,10 @@
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgModule } from '@angular/core';
-import {DashboardComponent} from './dashboard.commponent'
+import {DeeplearningComponent} from './deeplearning.component'
 import { NbCardModule} from '@nebular/theme';
 import {CatalogModule} from "../catalog-module";
 import {MaterialModule} from "app/material-module";
+
 @NgModule(
     {
         imports:[
@@ -13,8 +14,8 @@ import {MaterialModule} from "app/material-module";
             MaterialModule
         ],
         declarations:[
-            DashboardComponent,
+            DeeplearningComponent
         ]
     }
 )
-export class DashboardModule {}
+export class DeeplearningModule {}

@@ -1,0 +1,43 @@
+
+  <mat-table #table [dataSource]="listModels" class="mat-elevation-z8">
+  
+    <ng-container matColumnDef="no">
+      <mat-header-cell *matHeaderCellDef class="col-max-w-8"> No. </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="col-max-w-8"> {{row.no}} </mat-cell>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> File model </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="typeNetwork">
+        <mat-header-cell *matHeaderCellDef> Loại mạng </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.typeNetwork}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="acc">
+        <mat-header-cell *matHeaderCellDef> Độ chính xác </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.acc}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="totalTrain">
+        <mat-header-cell *matHeaderCellDef> Số lượng bài train </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.totalTrain}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="parameters">
+        <mat-header-cell *matHeaderCellDef> Parameters </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.parameters}} </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef=cols>
+    </mat-header-row>
+    <mat-row *matRowDef="let row; columns: cols">
+    </mat-row>
+  </mat-table>
+  <h3 class="text-center" *ngIf="listModels.length === 0">No records found</h3>
+  <!-- <mat-paginator [length]="dataSource.totalItem" [pageSize]="dataSource.pageSize" [pageIndex]="dataSource.index"
+    [pageSizeOptions]="[5,10,15,20]" (page)="$event; onChangePaginator($event)" showFirstLastButtons>
+  </mat-paginator> -->

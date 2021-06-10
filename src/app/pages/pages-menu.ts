@@ -14,7 +14,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Người dùng',
     icon: 'bar-chart-outline',
-    link: '/pages/user-dashboard',
+    link: '/pages/dashboard-user',
+  },
+  {
+    title: 'DEEP LEARNING',
+    group: true,
+  },
+  {
+    title: 'Mô hình Deeplearning',
+    icon: 'layers-outline',
+    link: '/pages/deeplearning',
   },
   {
     title: 'QUẢN LÍ DỮ LIỆU',

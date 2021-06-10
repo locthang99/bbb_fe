@@ -1,9 +1,12 @@
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgModule } from '@angular/core';
-import {DashboardComponent} from './dashboard.commponent'
+import {DashboardUserComponent} from './dashboard-user.commponent'
 import { NbCardModule} from '@nebular/theme';
 import {CatalogModule} from "../catalog-module";
 import {MaterialModule} from "app/material-module";
+import { ChartRoleUserComponent } from './chart-role-user/chart-role-user.component';
+
+
 @NgModule(
     {
         imports:[
@@ -13,8 +16,10 @@ import {MaterialModule} from "app/material-module";
             MaterialModule
         ],
         declarations:[
-            DashboardComponent,
+            DashboardUserComponent,
+            ChartRoleUserComponent,
+
         ]
     }
 )
-export class DashboardModule {}
+export class DashboardUserModule {}
