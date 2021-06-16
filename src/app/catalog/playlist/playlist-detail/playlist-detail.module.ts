@@ -6,7 +6,7 @@ import {ListSongDetailModule} from "../list-song-detail/list-song-detail.module"
 import { ThemeModule } from '../../../@theme/theme.module';
 import {MaterialModule} from "../../../material-module"
 import { BrowserModule } from '@angular/platform-browser'
-import {CatalogModule} from "../../catalog-module"
+import {CatalogModule} from "../../catalog.module"
 @NgModule({
   imports: [
     NbCardModule,

@@ -13,6 +13,7 @@ import {
   NbSelectModule,
   NbIconModule,
   NbThemeModule,
+  NbCardModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
@@ -25,7 +26,8 @@ import {
   TestCustomComponent,
   TableDataComponent,
   ToastComponent,
-  ConfirmDialogComponent
+  ConfirmDialogComponent,
+  PlayerComponent
   
 } from './components';
 import {
@@ -61,6 +63,7 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
+  NbCardModule
 ];
 const COMPONENTS = [
   HeaderComponent,
@@ -72,7 +75,8 @@ const COMPONENTS = [
   TwoColumnsLayoutComponent,
   TableDataComponent,
   ToastComponent,
-  ConfirmDialogComponent
+  ConfirmDialogComponent,
+  PlayerComponent
 ];
 const PIPES = [
   CapitalizePipe,

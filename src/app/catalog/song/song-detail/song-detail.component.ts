@@ -1,5 +1,4 @@
 import { Component, Input,Inject } from "@angular/core";
-import { NbDialogRef } from "@nebular/theme";
 import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({

@@ -11,7 +11,10 @@ export class ChartReactionSongComponent implements OnInit {
   isLoading = true;
   echartsIntance: any;
   options = {
-    title:{text:" Thong ke reaction"},
+    title:{text:" Thống kê tương tác bài hát"},
+    textStyle: {
+      fontFamily:'"Helvetica Neue", sans-serif',
+    },
     itemStyle: {
       normal: {
         opacity: 0,

@@ -1,7 +1,11 @@
 <nb-card>
-  <nb-card-header>
-    Quản lí người dùng
-  </nb-card-header>
-
-   
-  </nb-card>
+  <nb-card-body>
+    <mat-tab-group mat-align-tabs="end">
+      <mat-tab label="Admin"><ngx-list-account roleBase="ADMIN"></ngx-list-account></mat-tab>
+      <mat-tab label="Ca sĩ"><ngx-list-account roleBase="SINGER"></ngx-list-account></mat-tab>
+      <mat-tab label="Nhạc sĩ"><ngx-list-account roleBase="AUTHOR">></ngx-list-account></mat-tab>
+      <mat-tab label="Người dùng"><ngx-list-account roleBase="USER"></ngx-list-account></mat-tab>
+      <mat-tab label="Đã xóa"><ngx-list-account typeList="deleted"></ngx-list-account></mat-tab>
+    </mat-tab-group>
+  </nb-card-body>
+</nb-card>

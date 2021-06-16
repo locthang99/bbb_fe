@@ -8,7 +8,6 @@ export class TestComponent {
     public data:string;
     constructor()
     {
-        this.data="bbbbbbbbbbbbbbbbbbbbb"
     }
     onShow()
     {

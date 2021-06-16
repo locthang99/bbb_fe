@@ -24,9 +24,9 @@
 
                                 </div>
                                 <div class="c">
-
-                                    <audio [src]="fileMusic" id="music" style="height: 25px;width:100%;margin-top: 5px;" controls>
-                                    </audio>
+                                    <ngx-player #player></ngx-player>
+                                    <!-- <audio [src]="fileMusic" id="music" style="height: 25px;width:100%;margin-top: 5px;" controls>
+                                    </audio> -->
                                 </div>
                             </div>
                         </nb-card-body>
@@ -97,9 +97,10 @@
                 </div>
 
             </div>
-            <div class="col-1">
-                <button nbButton status="primary" style="height: 100%;" [disabled]="!canTest||!selectedModel.no" (click)="onTest()">
-                    Test<nb-icon icon="log-out-outline"></nb-icon>
+            <div class="col-0.5">
+                <div style="margin-left: 20%;">{{waitTime.toFixed(1)}}s</div>
+                <button nbButton status="primary" style="height: 98%;" [disabled]="!canTest||!selectedModel.no" (click)="onTest()">
+                    <nb-icon icon="log-out-outline"></nb-icon>
                 </button>
             </div>
             <div class="col-8">

@@ -2,7 +2,6 @@
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AdminHttpClient } from "app/services/auth/auth-service";
-import { parseDatetime } from "../common/conmmon";
 @Component({
   templateUrl: "profile.component.html",
   styleUrls: ["./profile.component.scss"],
@@ -11,25 +10,27 @@ export class ProfileComponent implements OnInit {
   loading = false;
   submitted = false;
   error = "";
-  user:any
+  user:any;
 
   constructor(
     private authenticationService: AdminHttpClient
   ) {
     
-    // redirect to home if already logged in
-    // if (this.authenticationService.currentUserValue) {
-    //     this.router.navigate(['/']);
-    // }
+    this.user ={
+      id: 3,
+      firstName: localStorage.getItem('firstName'),
+      lastName: localStorage.getItem('lastName'),
+      dob: localStorage.getItem('dob'),
+      phoneNumber: localStorage.getItem('phoneNumber'),
+      userName: localStorage.getItem('userName'),
+      email: localStorage.getItem('email'),
+      userVip: localStorage.getItem('userVip'),
+      verifyEmailStatus: localStorage.getItem('verifyEmailStatus'),
+      role: localStorage.getItem('role'),
+      thumbnail: localStorage.getItem('thumbnail')
+    }
   }
 
   ngOnInit() {
-    // this.authenticationService.getCurrentUser().subscribe((res: any) => {
-    //   if (res.status == 200) {
-    //     this.user=res.data.data;
-    //     this.user.dob = parseDatetime(this.user.dob)
-    //   } 
-    // });
-
   }
 }

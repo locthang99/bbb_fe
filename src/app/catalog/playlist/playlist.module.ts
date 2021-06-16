@@ -4,7 +4,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {PlaylistComponent} from './playlist.component'
 import { ThemeModule } from '../../@theme/theme.module';
 import { FormsModule,ReactiveFormsModule  }   from '@angular/forms';
-import {CatalogModule} from "../catalog-module"
+import {CatalogModule} from "../catalog.module"
 import {MaterialModule} from "../../material-module"
 
 @NgModule({

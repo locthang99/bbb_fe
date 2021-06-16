@@ -16,7 +16,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
-  user: any;
+  user ={
+    id: localStorage.getItem('id'),
+    firstName: localStorage.getItem('firstName'),
+    lastName: localStorage.getItem('lastName'),
+    dob: localStorage.getItem('dob'),
+    phoneNumber: localStorage.getItem('phoneNumber'),
+    userName: localStorage.getItem('userName'),
+    email: localStorage.getItem('email'),
+    userVip: localStorage.getItem('userVip'),
+    verifyEmailStatus: localStorage.getItem('verifyEmailStatus'),
+    role: localStorage.getItem('role'),
+    thumbnail: localStorage.getItem('thumbnail')
+  }
 
   themes = [
     {
@@ -48,18 +60,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
               ) {
-                // this.auth.getCurrentUser().subscribe((res:any)=>{
-                //   if(res.status==200)
-                //   this.user=res.data.data
-                // })
+                this.user ={
+                  id: localStorage.getItem('id'),
+                  firstName: localStorage.getItem('firstName'),
+                  lastName: localStorage.getItem('lastName'),
+                  dob: localStorage.getItem('dob'),
+                  phoneNumber: localStorage.getItem('phoneNumber'),
+                  userName: localStorage.getItem('userName'),
+                  email: localStorage.getItem('email'),
+                  userVip: localStorage.getItem('userVip'),
+                  verifyEmailStatus: localStorage.getItem('verifyEmailStatus'),
+                  role: localStorage.getItem('role'),
+                  thumbnail: localStorage.getItem('thumbnail')
+                }
+                console.log(this.user)
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()

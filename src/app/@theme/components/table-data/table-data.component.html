@@ -15,7 +15,7 @@
 
   <ng-container *ngIf='inputColumns.includes("thumbnail")' matColumnDef="thumbnail">
     <mat-header-cell *matHeaderCellDef class="col-max-w-8"> {{lang.table.image}} </mat-header-cell>
-    <mat-cell *matCellDef="let row" class="col-max-w-8"> <img width="40px" src={{row.thumbnail}}> </mat-cell>
+    <mat-cell *matCellDef="let row" class="col-max-w-8"> <img class="img-responsive" height="40px" src={{row.thumbnail}}> </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">
@@ -66,7 +66,7 @@
 
   <mat-header-row *matHeaderRowDef=inputColumns>
   </mat-header-row>
-  <mat-row *matRowDef="let row; columns: inputColumns; sticky: true">
+  <mat-row *matRowDef="let row; columns: inputColumns;">
   </mat-row>
 </mat-table>
 <h3 class="text-center" *ngIf="dataSource.data.length === 0">No records found</h3>

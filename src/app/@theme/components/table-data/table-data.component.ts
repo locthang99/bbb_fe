@@ -26,7 +26,7 @@ import { ConfirmDialogComponent } from "..//confirm-dialog/confirm-dialog.compon
 
 // import from utils
 import { lang } from "../../../@language/language";
-import { id } from "@swimlane/ngx-charts";
+
 
 @Component({
   selector: "ngx-table-data",

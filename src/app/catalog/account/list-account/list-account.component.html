@@ -1,0 +1,63 @@
+<ngx-search-input (onSearch)=onSearch($event) [placeholderString]="placeholderString">
+</ngx-search-input>
+
+<div class="example-loading-shade" *ngIf="isLoading">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>
+
+<mat-table #table [dataSource]="dataSource.data" class="mat-elevation-z8" matSort matSortActive="id" matSortDisableClear
+  matSortDirection="desc">
+
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear class="col-max-w-8"> Id </mat-header-cell>
+    <mat-cell *matCellDef="let row" class="col-max-w-8"> {{row.id}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="thumbnail">
+    <mat-header-cell *matHeaderCellDef class="col-max-w-8"> {{lang.table.image}} </mat-header-cell>
+    <mat-cell *matCellDef="let row" class="col-max-w-8"> <img width="40px" src={{row.thumbnail}}> </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{lang.table.name}} </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.firstName + row.lastName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{lang.table.email}} </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dob">
+    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{lang.table.dob}}</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.dob.slice(0,10)}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="roleBase">
+    <mat-header-cell *matHeaderCellDef mat-sort-header disableClear> {{lang.table.roleBase}}</mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.role}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef class="col-max-w-15"> {{lang.table.action}} </mat-header-cell>
+    <mat-cell class="text-center" *matCellDef="let row" class="col-max-w-15">
+      <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="Edit" (click)="onClickAccount(row.id)">edit_note</mat-icon>
+      <div></div>
+      <mat-icon *ngIf="typeList!='deleted'" style="cursor: pointer;" aria-hidden="false" aria-label="Delete" (click)="onDelete(row.id)">delete</mat-icon>
+      <div></div>
+      <mat-icon *ngIf="typeList=='deleted'"  style="cursor: pointer;" aria-hidden="false" aria-label="UnDelete" (click)="onUnDelete(row.id)">restart_alt</mat-icon>
+      <div></div>
+      <mat-icon *ngIf="typeList=='deleted'" style="cursor: pointer;" aria-hidden="false" aria-label="Delete" (click)="onStrongDelete(row.id)">delete_forever</mat-icon>
+
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef=inputColumns>
+  </mat-header-row>
+  <mat-row *matRowDef="let row; columns: inputColumns;">
+  </mat-row>
+</mat-table>
+<h3 class="text-center" *ngIf="dataSource.data.length === 0">No records found</h3>
+<mat-paginator [length]="dataSource.totalItem" [pageSize]="dataSource.pageSize" [pageIndex]="dataSource.index"
+  [pageSizeOptions]="[5,10,15,20]" (page)="$event; onChangePaginator($event)" showFirstLastButtons>
+</mat-paginator>

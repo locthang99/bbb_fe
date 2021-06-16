@@ -10,10 +10,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
-import {CatalogModule} from "./catalog/catalog-module"
+import {CatalogModule} from "./catalog/catalog.module"
+import {EnduserModule} from './end-user/end-user.module'
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TableDataModule } from "./@theme/components/table-data/table-data.module"
 import {MaterialModule} from './material-module'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './@http-interceptors/auth-interceptor';
@@ -50,7 +50,8 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    CatalogModule.forRoot()
+    CatalogModule.forRoot(),
+    EnduserModule.forRoot()
   ],
   bootstrap: [AppComponent],
   providers: [

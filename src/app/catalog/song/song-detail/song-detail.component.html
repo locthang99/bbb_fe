@@ -104,7 +104,20 @@
               <div>
                 <li style="display: inline; list-style: none;" *ngFor="let t of song.types">
                   <span class="tag">{{t.name}}</span>
-                  <mat-progress-bar mode="determinate" value={{t.id}}></mat-progress-bar>
+                  <div class="row">
+                    <mat-progress-bar class="col-8" mode="determinate" value={{t.value}}></mat-progress-bar>
+                    <div class="col-4" style="margin-top: 3px;">{{t.value}}</div>
+                  </div>
+
+                  <!-- <mat-slider
+                      class="example-margin"
+                      max="100"
+                      min="0"
+                      step="1"
+                      thumbLabel="true"
+                      value={{t.value}}
+                      aria-labelledby="example-name-label">
+                  </mat-slider> -->
                   <div>---</div>
                 </li>
               </div>

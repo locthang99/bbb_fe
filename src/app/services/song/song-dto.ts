@@ -1,3 +1,5 @@
+import { FileParameter } from "../service-base";
+
 export class UserCmtRequest {
     objId!: number;
     content?: string | undefined;
@@ -41,4 +43,16 @@ export class CommentCommand extends UserCmtRequest {
         super.toJSON(data);
         return data; 
     }
+}
+export interface SongDTO
+{
+    name: string;
+    thubnail: FileParameter;
+    lyric:FileParameter;
+    description: string;
+    duration: string;
+    isOfficial:string;
+    file128:FileParameter;
+    file320:FileParameter;
+    fileLossless:FileParameter;
 }

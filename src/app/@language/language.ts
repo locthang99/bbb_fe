@@ -15,7 +15,10 @@ export const lang ={
         singers:"Ca sĩ",
         owner:"Nguời tạo",
         dateCreate:"Ngày tạo",
+        dob:"Ngày sinh",
+        email:"Email",
         action:"Thao tác",
+        roleBase:"Loại"
 
     },
     detail:{

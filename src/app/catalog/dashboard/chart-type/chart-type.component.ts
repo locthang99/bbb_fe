@@ -23,7 +23,7 @@ export class ChartTypeComponent implements OnInit {
       formatter: '{a} <br/>{b} : {c} ({d}%)'
     },
     textStyle: {
-      fontFamily:"Microsoft YaHei",
+      fontFamily:'"Helvetica Neue", sans-serif',
       fontSize :15
     },
     // legend: {

@@ -16,6 +16,9 @@ export class ChartRoleUserComponent implements OnInit {
       text: 'Thông kê loại user',
       x: 'center'
     },
+    textStyle: {
+      fontFamily:'"Helvetica Neue", sans-serif',
+    },
     tooltip: {
       trigger: 'item',
       formatter: '{a} <br/>{b} : {c} ({d}%)'

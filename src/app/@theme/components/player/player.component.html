@@ -1,0 +1,70 @@
+<nb-card>
+  <!-- <nb-card-header class="header">My Playlist</nb-card-header> -->
+  <nb-card-body class="body">
+    <!-- <ng-container class="track-info" *ngIf="showInfo">
+      <div class="details" >
+        <img width="200px" src={{urlThumbnail}}>
+      </div>
+      <div class="details">
+        <input type="text" nbInput fullWidth fieldSize="small" placeholder="Tên bài hát">
+        <div class="d-flex justify-content-start align-items-center">
+          <input #fileAudio type="file" accept="audio/mp3" (change)="changeFileAudio($event)"
+              style="display: none;" />
+          <button nbButton status="primary" (click)="fileAudio.click()">
+              <nb-icon icon="headphones-outline"></nb-icon>
+          </button>
+          <div style="margin-left: 3px;">"abc.mp3"</div>
+      </div>
+      </div>
+    </ng-container>  -->
+
+    <audio #player [src]="url" style="height: 25px;width:100%;margin-top: 5px;" controls></audio>
+    <div class="progress-wrap">
+      <mat-slider class="progress-time" min="0" [max]="player.duration" step="0.1"
+       [value]="player.currentTime" (input)="setProgress(duration.value)" #duration></mat-slider>
+      <!-- <input dir="ltr" type="range" class="progress" [value]="getProgress()" min="0" [max]="player.duration" step="1"
+             (input)="setProgress(duration.value)" #duration> -->
+      <!-- <div class="progress-foreground" [style.width.%]="getProgress()"></div> -->
+    </div>
+
+    <div class="timing">
+      <small class="current">{{ float2int(player.currentTime) || 0  }}</small>
+      <small class="remaining">- {{float2int(player.duration - player.currentTime)||0}}</small>
+    </div>
+
+    <div class="controls">
+      <!-- <button class="control-button" nbButton ghost size="tiny" (click)="toggleShuffle()" [class.on]="shuffle">
+        <nb-icon icon="shuffle-2-outline" pack="eva"></nb-icon>
+      </button> -->
+      <button class="control-button" nbButton ghost size="medium" (click)="prev()">
+        <nb-icon class="skip" icon="skip-back-outline" pack="eva"></nb-icon>
+      </button>
+      <button class="control-button play-button" nbButton ghost size="medium" (click)="playPause()">
+        <nb-icon class="play" [icon]="player.paused ? 'play-circle-outline' : 'pause-circle-outline'" pack="eva">
+        </nb-icon>
+      </button>
+      <button class="control-button skip-forward-button" nbButton ghost size="medium" (click)="next()">
+        <nb-icon class="skip" icon="skip-forward-outline" pack="eva"></nb-icon>
+      </button>
+      <!-- <button class="control-button" nbButton ghost size="tiny" (click)="toggleLoop()" [class.on]="player.loop">
+        <nb-icon icon="repeat-outline" pack="eva"></nb-icon>
+      </button> -->
+    </div>
+  </nb-card-body>
+
+  <nb-card-footer class="footer">
+    <div class="volume">
+      <button nbButton ghost size="small" (click)="setVolume(0)">
+        <nb-icon class="volume-icon" icon="volume-down-outline" pack="eva"></nb-icon>
+      </button>
+      <div class="progress-wrap">
+        <input type="range" class="progress" [value]="getVolume()" max="100"
+               (input)="setVolume(volume.value)" #volume>
+        <div class="progress-foreground" [style.width.%]="getVolume()"></div>
+      </div>
+      <button nbButton ghost size="small" (click)="setVolume(100)">
+        <nb-icon class="volume-icon" icon="volume-up-outline" pack="eva"></nb-icon>
+      </button>
+    </div>
+  </nb-card-footer>
+</nb-card>
