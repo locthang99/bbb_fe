@@ -1,5 +1,4 @@
-<nb-card>
-    <nb-card-header>Tạo mới bài hát</nb-card-header>
+
     <nb-card-body>
         <mat-horizontal-stepper linear #stepper>
             <mat-step>
@@ -27,32 +26,38 @@
                             <textarea nbInput fullWidth [(ngModel)]="song.description" name="description" placeholder="Nghe rất phiêu..."></textarea>
                             <div style="float: right;">
                                 <mat-label>Loại: </mat-label>
-                                <nb-select [selected]=true [(ngModel)]="song.isOfficial" name="isOfficial">
-                                    <nb-option value=true>Offical</nb-option>
-                                    <nb-option value=false>Cover</nb-option>
+                                <nb-select [(ngModel)]="song.isOfficial" name="isOfficial">
+                                    <nb-option value="true">Offical</nb-option>
+                                    <nb-option value="false">Cover</nb-option>
+                                </nb-select>
+
+                                <mat-label class="ml-1">Vùng: </mat-label>
+                                <nb-select [(ngModel)]="song.country" name="country">
+                                    <nb-option value="VN">Việt Nam</nb-option>
+                                    <nb-option value="US">Âu Mỹ  </nb-option>
                                 </nb-select>
                             </div>
 
                         </div>
                         <div class="col-3">
                             <!-- Select File -->
-                            <mat-label for="input">Lyric: </mat-label>
+                            <mat-label for="input">Lyric: {{song.lyric.fileName || '*.txt'}}</mat-label>
                             <input #fileLyric type="file" accept=".txt" (change)="onChangeLyric($event)" style="display: none;" />
                             <!-- Image Preview -->
                             <div class="border border-pwrimary rounded d-flex justify-content-center"
                                 (click)="fileLyric.click()" style="height: 100%;">
-                                <div *ngIf="song.lyric==null" class="align-self-center">
+                                <div *ngIf="song.lyric.data==null" class="align-self-center">
                                     <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="">edit_note
                                     </mat-icon>
                                 </div>
-                                <textarea *ngIf="song.lyric!==null" nbInput fullWidth [(ngModel)]="lyricContent" name="lyricContent"></textarea>
+                                <textarea *ngIf="song.lyric.data!==null" nbInput fullWidth [(ngModel)]="lyricContent" name="lyricContent"></textarea>
                                 <!-- <img *ngIf="thumbnailUrl!==null" [src]="thumbnailUrl" class="imagePreview"> -->
                             </div>
                         </div>
                         <div class="col-5">
                             <mat-tab-group mat-align-tabs="start">
-                                <mat-tab label="128kbs">
-                                    <div class="d-flex justify-content-start align-items-center">
+                                <mat-tab label="128kbps (*)">
+                                    <div class="d-flex justify-content-start align-items-center mt-4">
                                         <input #file128 type="file" accept="audio/mp3" (change)="onChangeFile128($event)"
                                             style="display: none;" />
                                         <button nbButton status="primary" (click)="file128.click()">
@@ -62,33 +67,54 @@
 
     
                                     </div>
-                                    <audio #player [src]="file128Url" style="height: 25px;width:100%;margin-top: 5px;" controls></audio>
+                                    <audio #player128 [src]="file128Url" (canplaythrough)="checkQuality128($event)" style="height: 25px;width:100%;margin-top: 5px;" controls></audio>
+                            
+                                    <ng-container *ngIf="check128!=null&&check128">                                            
+                                        <div><nb-icon icon="checkmark-circle-2-outline" status="success"></nb-icon>Đạt chuẩn 128kbps</div>
+                                    </ng-container>
+                                    <ng-container *ngIf="check128!=null&&!check128">                                          
+                                        <div><nb-icon icon="close-circle-outline" status="danger"></nb-icon>Không đạt chuẩn 128kbps</div>
+                                    </ng-container>
+                                    
                                 </mat-tab>
-                                <mat-tab label="320Kbs">
-                                    <div class="d-flex justify-content-start align-items-center">
+                                <mat-tab label="320kbps">
+                                    <div class="d-flex justify-content-start align-items-center mt-4">
                                         <input #file320 type="file" accept="audio/mp3" (change)="onChangeFile320($event)"
                                             style="display: none;" />
-                                        <button nbButton status="primary" (click)="file128.click()">
+                                        <button nbButton status="primary" (click)="file320.click()">
                                             <nb-icon icon="headphones-outline"></nb-icon>
                                         </button>
                                         <div style="margin-left: 3px;">{{song.file320.fileName||'.mp3'}}</div>
     
                                     </div>
-                                    <audio #player [src]="file320Url" style="height: 25px;width:100%;margin-top: 5px;" controls></audio>
+                                    <audio #player320 [src]="file320Url" (canplaythrough)="checkQuality320($event)" style="height: 25px;width:100%;margin-top: 5px;" controls></audio>
+                                
+                                    <ng-container *ngIf="check320!=null&&check320">                                            
+                                        <div><nb-icon icon="checkmark-circle-2-outline" status="success"></nb-icon>Đạt chuẩn 320kbps</div>
+                                    </ng-container>
+                                    <ng-container *ngIf="check320!=null&&!check320">                                          
+                                        <div><nb-icon icon="close-circle-outline" status="danger"></nb-icon>Không đạt chuẩn 320kbps</div>
+                                    </ng-container>
                                 </mat-tab>
                                 <mat-tab label="Lossless">
-                                    <div class="d-flex justify-content-start align-items-center">
-                                        <input #fileLossless type="file" accept="audio/mp3" (change)="onChangeFileLossless($event)"
+                                    <div class="d-flex justify-content-start align-items-center mt-4">
+                                        <input #fileLossless type="file" accept=".flac" (change)="onChangeFileLossless($event)"
                                             style="display: none;" />
                                         <button nbButton status="primary" (click)="fileLossless.click()">
                                             <nb-icon icon="headphones-outline"></nb-icon>
                                         </button>
-                                        <div style="margin-left: 3px;">{{song.fileLossless.fileName||'.mp3'}}</div>
+                                        <div style="margin-left: 3px;">{{song.fileLossless.fileName||'.flac'}}</div>
 
     
                                     </div>
-                                    <audio #player [src]="fileLosslessUrl" style="height: 25px;width:100%;margin-top: 5px;" controls></audio>
-
+                                    <audio #playerLossless [src]="fileLosslessUrl" (canplaythrough)="checkQualityLossless($event)" style="height: 25px;width:100%;margin-top: 5px;" controls></audio>
+                                    
+                                    <ng-container *ngIf="checkLossless!=null&&checkLossless">                                            
+                                        <div><nb-icon icon="checkmark-circle-2-outline" status="success"></nb-icon>Đạt chuẩn Lossless</div>
+                                    </ng-container>
+                                    <ng-container *ngIf="checkLossless!=null&&!checkLossless">                                          
+                                        <div><nb-icon icon="close-circle-outline" status="danger"></nb-icon>Không đạt chuẩn Lossless</div>
+                                    </ng-container>
                                 </mat-tab>
                             </mat-tab-group>
 
@@ -96,28 +122,49 @@
                     </div>
 
                     <div>
-                        <button class="btn btn-primary" (click)="onCreate()">Tạo</button>
+                        <button mat-raised-button color="primary" (click)="onCreate()">Tạo</button>
                     </div>
                 </form>
             </mat-step>
 
             <mat-step>
-                <ng-template matStepLabel>Tag</ng-template>
+                <ng-template matStepLabel>Chọn ca sĩ/nhạc sĩ</ng-template>               
+                <ngx-list-singer-composer #listSingerComposer [songId]="songIdCreated"></ngx-list-singer-composer>               
                 <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
+                    <button mat-raised-button color="primary" (click)="listSingerComposer.onPushAll();stepper.next()">Xong</button>
+                    <button mat-raised-button color="primary" (click)="stepper.next()">Bỏ qua</button>
                 </div>
             </mat-step>
             <mat-step>
-                <ng-template matStepLabel>Chọn ca sĩ/nhạc sĩ</ng-template>
-                <mat-tab-group mat-stretch-tabs>
-                    <div>type</div>
-                </mat-tab-group>
+                <ng-template matStepLabel>Phân tích nhạc</ng-template>
+                    <div class="row">
+                        <div class="col-12">
+                            <ngx-detail-predict-type [resultPredict]="resultPredict" [isLoading]="isLoadingPredict" ></ngx-detail-predict-type>
+                            <div class="example-loading-shade" *ngIf="isLoadingPredict">
+                                <div style="left: 30px;">
+                                    <mat-spinner *ngIf="isLoadingPredict"></mat-spinner>
+                                    <div>Đang phân tích...</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-3">
+                            <h3>Quốc gia:</h3>
+                            <h2>VietNam</h2>
+                            <img width="100%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png">
+
+                        </div> -->
+                    </div>
                 <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
+                    <button mat-raised-button color="primary" (click)="onDone()">Xong</button>
                 </div>
             </mat-step>
+            <!-- <mat-step>
+                <ng-template matStepLabel>Hoàn tất</ng-template>
+                    <div>type</div>
+                <div>
+                    <button mat-raised-button color="primary">Back</button>
+                    <button mat-raised-button color="primary" (click)="stepper.reset()">Reset</button>
+                </div>
+            </mat-step> -->
         </mat-horizontal-stepper>
     </nb-card-body>
-</nb-card>

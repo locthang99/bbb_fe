@@ -5,7 +5,7 @@ import {LoginComponent} from './catalog/login/login.component'
 
 export const routes: Routes = [
   {
-    path: 'catalog',
+    path: 'admin',
     loadChildren: () => import('./catalog/catalog.module')
       .then(m => m.CatalogModule),
   },
@@ -15,10 +15,13 @@ export const routes: Routes = [
       .then(m => m.EnduserModule),
   },
   {
-    path: 'auth',component: LoginComponent,pathMatch:'full'
+    path: 'auth_admin',component: LoginComponent,pathMatch:'full'
   },
-  { path: '', redirectTo: 'catalog',pathMatch:'full'},
-  { path: '**', redirectTo: 'catalog' ,pathMatch:'full'},
+  {
+    path: 'auth_enduser',component: LoginComponent,pathMatch:'full'
+  },
+  // { path: '', redirectTo: 'admin',pathMatch:'full'},
+  // { path: '**', redirectTo: 'admin' ,pathMatch:'full'},
 ];
 
 const config: ExtraOptions = {

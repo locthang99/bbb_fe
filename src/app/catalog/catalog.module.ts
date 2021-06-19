@@ -5,7 +5,6 @@ import { CatalogComponent } from './catalog.component';
 import {CatalogRoutingModule} from './catalog-routing.module'
 import {ListSongDetailComponent} from "./playlist/list-song-detail/list-song-detail.component"
 import {CreatePlaylistComponent} from "./playlist/create-playlist/create-playlist.component"
-import {CreateSongComponent} from "./song/create-song/create-song.component"
 import {CreateTypeComponent} from "./type/create-type/create-type.component"
 import {CreateTagComponent} from "./tag/create-tag/create-tag.component"
 
@@ -43,6 +42,8 @@ import { ListAccountComponent } from './account/list-account/list-account.compon
 import { DetailAccountComponent } from './account/detail-account/detail-account.component'
 
 import { ThemeModule } from '../@theme/theme.module';
+import { CreateSongComponent } from '../end-user/create-song/create-song.component';
+import { ListSingerComposerComponent } from '../end-user/create-song/list-singer-composer/list-singer-composer.component';
 //import { BrowserModule } from '@angular/platform-browser'
 import {MaterialModule} from '../material-module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -61,6 +62,7 @@ const COMPONENTS =[
     CatalogComponent,
 
     CreateSongComponent,
+    ListSingerComposerComponent,
     ListSongDetailComponent,
     CreatePlaylistComponent,
     CreateTypeComponent,

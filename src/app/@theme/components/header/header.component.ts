@@ -16,19 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
-  user ={
-    id: localStorage.getItem('id'),
-    firstName: localStorage.getItem('firstName'),
-    lastName: localStorage.getItem('lastName'),
-    dob: localStorage.getItem('dob'),
-    phoneNumber: localStorage.getItem('phoneNumber'),
-    userName: localStorage.getItem('userName'),
-    email: localStorage.getItem('email'),
-    userVip: localStorage.getItem('userVip'),
-    verifyEmailStatus: localStorage.getItem('verifyEmailStatus'),
-    role: localStorage.getItem('role'),
-    thumbnail: localStorage.getItem('thumbnail')
-  }
+  user :any;
 
   themes = [
     {
@@ -60,22 +48,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
               ) {
-                this.user ={
-                  id: localStorage.getItem('id'),
-                  firstName: localStorage.getItem('firstName'),
-                  lastName: localStorage.getItem('lastName'),
-                  dob: localStorage.getItem('dob'),
-                  phoneNumber: localStorage.getItem('phoneNumber'),
-                  userName: localStorage.getItem('userName'),
-                  email: localStorage.getItem('email'),
-                  userVip: localStorage.getItem('userVip'),
-                  verifyEmailStatus: localStorage.getItem('verifyEmailStatus'),
-                  role: localStorage.getItem('role'),
-                  thumbnail: localStorage.getItem('thumbnail')
-                }
+                if(window.location.href.includes('admin'))
+                  this.getProfile('admin')
+                else
+                  this.getProfile('enduser')
                 console.log(this.user)
   }
 
+  getProfile(typeUser)
+  {
+    this.user ={
+      id: localStorage.getItem(typeUser+'.id'),
+      firstName: localStorage.getItem(typeUser+'.firstName'),
+      lastName: localStorage.getItem(typeUser+'.lastName'),
+      dob: localStorage.getItem(typeUser+'.dob'),
+      phoneNumber: localStorage.getItem(typeUser+'.phoneNumber'),
+      userName: localStorage.getItem(typeUser+'.userName'),
+      email: localStorage.getItem(typeUser+'.email'),
+      userVip: localStorage.getItem(typeUser+'.userVip'),
+      verifyEmailStatus: localStorage.getItem(typeUser+'.verifyEmailStatus'),
+      role: localStorage.getItem(typeUser+'.role'),
+      thumbnail: localStorage.getItem(typeUser+'.thumbnail')
+    }
+  }
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
 

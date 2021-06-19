@@ -8,13 +8,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dữ liệu',
     icon: 'pie-chart-outline',
-    link: '/catalog/dashboard',
+    link: '/admin/dashboard',
     home: true,
   },
   {
     title: 'Người dùng',
     icon: 'bar-chart-outline',
-    link: '/catalog/dashboard-user',
+    link: '/admin/dashboard-user',
   },
   {
     title: 'DEEP LEARNING',
@@ -23,7 +23,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Mô hình Deeplearning',
     icon: 'layers-outline',
-    link: '/catalog/deeplearning',
+    link: '/admin/deeplearning',
   },
   {
     title: 'QUẢN LÍ DỮ LIỆU',
@@ -32,22 +32,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Bài hát',
     icon: 'music',
-    link: '/catalog/song',
+    link: '/admin/song',
   },
   {
     title: 'Playlist',
     icon: 'list',
-    link: '/catalog/playlist',
+    link: '/admin/playlist',
   },
   {
     title: 'Thể loại',
     icon: 'file',
-    link: '/catalog/type',
+    link: '/admin/type',
   },
   {
     title: 'Tag',
     icon: 'bookmark-outline',
-    link: '/catalog/tag',
+    link: '/admin/tag',
   },
   {
     title: 'QUẢN LÍ NGƯỜI DÙNG',
@@ -56,7 +56,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Người dùng và phân quyền',
     icon: 'people-outline',
-    link: '/catalog/account',
+    link: '/admin/account',
   },
   {
   title: '---------------------------------------------------',
@@ -65,11 +65,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Cá nhân',
     icon: 'person-outline',
-    link: '/catalog/user',
+    link: '/admin/user',
   },
   {
     title: 'Đăng xuất',
     icon: 'log-out',
-    link: '/catalog/logout',
+    link: '/admin/logout',
   },
 ];

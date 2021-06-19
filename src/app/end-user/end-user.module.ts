@@ -10,7 +10,6 @@ import {MaterialModule} from '../material-module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NbCardModule,NbSelectModule,NbToggleModule,NbIconModule,NbListModule,NbButtonModule,NbInputModule} from '@nebular/theme';
-import { CreateSongComponent } from './create-song/create-song.component';
 import { UpdateAccountComponent } from './update-account/update-account.component';
 import { ListMySongComponent } from './list-my-song/list-my-song.component';
 import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
@@ -25,11 +24,14 @@ const MODULE_IMPORTS =[
 ]
 const COMPONENTS =[
     EndUserComponent,
+    UpdateAccountComponent,
+    ListMySongComponent,
+    MyDashboardComponent,
 ]
 @NgModule({
   imports: [...MODULE_IMPORTS],
   exports: [...COMPONENTS],
-  declarations: [...COMPONENTS, CreateSongComponent, UpdateAccountComponent, ListMySongComponent, MyDashboardComponent],
+  declarations: [...COMPONENTS],
 })
 export class EnduserModule {
   static forRoot(): ModuleWithProviders<EnduserModule> {

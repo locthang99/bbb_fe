@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-5">
+        <div>
+            <h3>
+                    Thêm ca sĩ:
+            </h3>
+            <hr style="border: 1px #000;">
+            <div>
+                <li *ngFor="let singer of listSingerSelected" style="list-style: none;">
+                    <div class="row d-flex justify-content-start align-items-center">
+                        <div class="col-2">
+                            {{singer.id}}
+                        </div>
+                        <div class="col-3">
+                            <img width="40" src="{{singer.thumbnail}}">
+                        </div>
+                        <div class="col-3">
+                            {{singer.lastName+' '+singer.firstName}}
+                        </div>
+                        <div class="col-2">
+                            {{singer.role}}
+                        </div>
+                        <div class="col-2">
+                            <nb-icon style="cursor: pointer;" icon="person-remove-outline" (click)="removeSinger(singer.id)"></nb-icon>
+                        </div>
+                    </div>
+                    <hr style="border: 1px #000;">
+                </li>
+            </div>
+        </div>
+
+        <div>
+            <h3>
+                    Thêm nhạc sĩ:
+            </h3>
+            <hr style="border: 1px #000;">
+            <div>
+                <li *ngFor="let composer of listComposerSelected" style="list-style: none;">
+                    <div class="row d-flex justify-content-start align-items-center">
+                        <div class="col-2">
+                            {{composer.id}}
+                        </div>
+                        <div class="col-3">
+                            <img width="40" src="{{composer.thumbnail}}">
+                        </div>
+                        <div class="col-3">
+                            {{composer.lastName+' '+composer.firstName}}
+                        </div>
+                        <div class="col-2">
+                            {{composer.role}}
+                        </div>
+                        <div class="col-2">
+                            <nb-icon style="cursor: pointer;" icon="person-remove-outline" (click)="removeComposer(composer.id)"></nb-icon>
+                        </div>
+                    </div>
+                    <hr style="border: 1px #000;">
+                </li>
+            </div>
+        </div>
+    </div>
+    <div class="col-7">
+        <nb-card>
+            <nb-card-header>
+                <input class="col-11" type="text" fullWidth nbInput [(ngModel)]="keyword" name="keyword" placeholder="Tìm kiếm ca sĩ, nhạc sĩ....">
+                <button class="btn btn-primary">
+                    <nb-icon style="cursor: pointer;" icon="search-outline" (click)="onSearch()" ></nb-icon>
+                </button>
+            </nb-card-header>
+            <nb-card-body>
+                <li *ngFor="let sc of listSingerComposer" style="list-style: none;">
+                    <div class="row d-flex justify-content-start align-items-center">
+                        <div class="col-1"></div>
+                        <div class="col-1">
+                            {{sc.id}}
+                        </div>
+                        <div class="col-2">
+                            <img width="40" src="{{sc.thumbnail}}">
+                        </div>
+                        <div class="col-3">
+                            {{sc.lastName+' '+sc.firstName}}
+                        </div>
+                        <div class="col-2">
+                            {{sc.role}}
+                        </div>
+                        <div class="col-1">
+                            <nb-icon style="cursor: pointer;" icon="person-add-outline" (click)="addSinger(sc)"></nb-icon>
+                        </div>
+                        <div class="col-1">
+                            <nb-icon style="cursor: pointer;" icon="person-done-outline" (click)="addComposer(sc)"></nb-icon>
+                        </div>
+                    </div>
+                    <hr style="border: 1px #000;">
+                </li>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+</div>

@@ -1,1 +1,16 @@
-<p>list-my-song works!</p>
+<nb-card>
+  <nb-card-body>
+    <mat-tab-group mat-align-tabs="end">
+      <mat-tab label="Quản lí bài hát">
+        <ngx-table-data [services]=service [inputColumns]=cols [placeholderString]=stringInput
+        (onClickRow)=onClickSong($event) typeTable="mySong">
+      </ngx-table-data>
+      </mat-tab>
+      <mat-tab label="Bài hát đã xóa">
+        <ngx-table-data [services]=service [inputColumns]=cols [placeholderString]=stringInput
+          (onClickRow)=onClickSong($event) typeTable='delete'>
+        </ngx-table-data>
+      </mat-tab>
+    </mat-tab-group>
+  </nb-card-body>
+</nb-card>

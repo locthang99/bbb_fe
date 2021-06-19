@@ -1,7 +1,7 @@
 import { FileResponse, FileParameter, SwaggerResponse, HOST_API, ApiException,ServiceBaseHttpClient } from "../service-base"
 import { Injectable,InjectionToken,Inject,Optional} from '@angular/core';
 import {
-    CommentCommand
+    CommentCommand, SongDTO
 }
     from "./song-dto"
 import { HttpClient } from "@angular/common/http";
@@ -18,29 +18,45 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
             super(http,"Song");
         } 
     
-        create(name: string | null | undefined, description: string | null | undefined, lyric: FileParameter | null | undefined, duration: number | undefined, thumbnail: FileParameter | null | undefined, fileMusic: FileParameter | null | undefined, isPublic: boolean | undefined): Promise<any> {
+        create(song:SongDTO): Promise<any> {
             let url_ = this.basePrefix + "";
             url_ = url_.replace(/[?&]$/, "");
     
             const content_ = new FormData();
-            if (name !== null && name !== undefined)
-                content_.append("Name", name.toString());
-            if (description !== null && description !== undefined)
-                content_.append("Description", description.toString());
-            if (lyric !== null && lyric !== undefined)
-                content_.append("Lyric", lyric.data, lyric.fileName ? lyric.fileName : "Lyric");
-            if (duration === null || duration === undefined)
+            if (song.name !== null && song.name !== undefined)
+                content_.append("Name", song.name.toString());
+
+            if (song.description !== null && song.description !== undefined)
+                content_.append("Description", song.description.toString());
+
+            if (song.lyric.data !== null && song.lyric.data !== undefined)
+                content_.append("Lyric", song.lyric.data, song.lyric.fileName ? song.lyric.fileName : "Lyric");
+
+            if (song.duration === null || song.duration === undefined)
                 throw new Error("The parameter 'duration' cannot be null.");
             else
-                content_.append("Duration", duration.toString());
-            if (thumbnail !== null && thumbnail !== undefined)
-                content_.append("Thumbnail", thumbnail.data, thumbnail.fileName ? thumbnail.fileName : "Thumbnail");
-            if (fileMusic !== null && fileMusic !== undefined)
-                content_.append("FileMusic", fileMusic.data, fileMusic.fileName ? fileMusic.fileName : "FileMusic");
-            if (isPublic === null || isPublic === undefined)
-                throw new Error("The parameter 'isPublic' cannot be null.");
+                content_.append("Duration", song.duration.toString());
+
+            if (song.thumbnail.data !== null && song.thumbnail.data !== undefined)
+                content_.append("Thumbnail", song.thumbnail.data, song.thumbnail.fileName ? song.thumbnail.fileName : "Thumbnail");
+            
+            if (song.file128.data !== null && song.file128.data !== undefined)
+                content_.append("FileMusic128", song.file128.data, song.file128.fileName ? song.file128.fileName : "FileMusic128");
+            if (song.file320.data !== null && song.file320.data !== undefined)
+                content_.append("FileMusic320", song.file320.data, song.file320.fileName ? song.file128.fileName : "FileMusic320");
+            if (song.fileLossless.data !== null && song.fileLossless.data !== undefined)
+                content_.append("FileMusicLossless", song.fileLossless.data, song.fileLossless.fileName ? song.fileLossless.fileName : "FileMusicLossless");
+            
+            if(song.isOfficial=="true")
+                content_.append("IsOfficial","true")
             else
-                content_.append("IsPublic", isPublic.toString());
+                content_.append("IsOfficial","false")
+
+            if(song.country=="VN")
+                content_.append("Country","Việt Nam")
+            else
+                content_.append("Country","Âu Mỹ")
+            content_.append("IsPublic", "true");
     
             let options_ = {
                 body: content_,
@@ -115,7 +131,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
                 }
             };
     
-            return fetch(url_, options_).then(_response => _response.json())
+            return this.http.request("GET",url_, options_).toPromise();
         }
     
     
@@ -228,6 +244,24 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
     
             return fetch(url_, options_).then(_response => _response.json())
         }
+
+        predictType(id: number | undefined,): Promise<any> {
+            let url_ = this.basePrefix + "/PredictType?";
+            if (id === null)
+                throw new Error("The parameter 'id' cannot be null.");
+            else if (id !== undefined)
+                url_ += "Id=" + encodeURIComponent("" + id) + "&";
+            url_ = url_.replace(/[?&]$/, "");
+    
+            let options_ = {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json"
+                }
+            };
+    
+            return this.http.request('POST',url_, options_).toPromise();
+        }
     
     
         updateType(songId: number, typeId: number): Promise<any> {
@@ -289,7 +323,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
                 }
             };
     
-            return fetch(url_, options_).then(_response => _response.json())
+            return this.http.request('PUT',url_, options_).toPromise()
         }
     
     
@@ -310,7 +344,7 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
                 }
             };
     
-            return fetch(url_, options_).then(_response => _response.json())
+            return this.http.request('PUT',url_, options_).toPromise()
         }
     
     

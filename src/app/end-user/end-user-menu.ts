@@ -24,13 +24,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'plus-square-outline',
     link: '/enduser/newsong',
   },
-
   {
-    title: 'Nâng cấp VIP',
-    group: true,
-  },
-    {
-    title: 'Mua Vip',
+    title: 'Nâp cấp tài khoản',
     icon: 'arrowhead-up-outline',
     link: '/enduser/buyvip',
   },

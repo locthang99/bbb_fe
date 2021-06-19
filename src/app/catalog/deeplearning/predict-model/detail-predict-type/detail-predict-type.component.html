@@ -1,4 +1,4 @@
-<mat-horizontal-stepper labelPosition="bottom" style="height: 100%;" #stepper>
+<!-- <mat-horizontal-stepper labelPosition="bottom" style="height: 100%;" #stepper>
      <mat-step *ngFor="let rs of resultPredict; index as i">
           <ng-template matStepLabel>{{rs.time}}</ng-template>
 
@@ -9,7 +9,15 @@
                </div>
           </div>
      </mat-step>
-</mat-horizontal-stepper>
+</mat-horizontal-stepper> -->
+<mat-tab-group mat-align-tabs="center">
+     <mat-tab *ngFor="let rs of resultPredict; index as i" label={{rs.time}}>
+          
+                    <div echarts [options]="initOption(i)" class="echart" [loading]="isLoading" [theme]="macaronsTheme"
+                         (chartInit)="onChartInit($event)"></div>
+               
+     </mat-tab>
+</mat-tab-group>
 <!-- <div class="example-loading-shade" *ngIf="isLoading">
      <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div> -->

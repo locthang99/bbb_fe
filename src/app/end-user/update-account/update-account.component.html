@@ -1,1 +1,48 @@
-<p>update-account works!</p>
+<div class="row">
+    <div class="col-6">
+        <li *ngFor="let item of listItem" style="list-style: none;">
+            <nb-card>
+                <div class="row d-flex justify-content-start align-items-center">
+                    <div class="col-2">
+                        <img height="100" src="{{item.img}}">
+                    </div>
+                    <div class="col-3">
+                        {{item.name}}
+                    </div>
+                    <div class="col-3">
+                        {{item.price}}
+                    </div>
+                    <div class="col-2">
+                        {{item.discount}}
+                    </div>
+                    <div class="col-2">
+                        <nb-icon style="cursor: pointer;" icon="npm-outline" (click)="onBuyt(item.id)"></nb-icon>
+                    </div>
+                </div>
+            </nb-card>
+        </li>
+    </div>
+    <div class="col-6">
+        <li *ngFor="let item of listItem2" style="list-style: none;">
+            <nb-card>
+                <div class="row d-flex justify-content-start align-items-center">
+                    <div class="col-2">
+                        <img height="100" src="{{item.img}}">
+                    </div>
+                    <div class="col-3">
+                        {{item.name}}
+                    </div>
+                    <div class="col-3">
+                        {{item.price}}
+                    </div>
+                    <div class="col-2">
+                        {{item.discount}}
+                    </div>
+                    <div class="col-2">
+                        <nb-icon style="cursor: pointer;" icon="npm-outline" (click)="onBuyt(item.id)"></nb-icon>
+                    </div>
+                </div>
+            </nb-card>
+        </li>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { MENU_ITEMS } from './catalog-menu';
-import { AdminHttpClient } from "app/services/auth/auth-service";
+import { AdminHttpClient } from "app/services/auth/auth-admin-service";
 import { Router } from "@angular/router";
 @Component({
   selector: 'ngx-catalog',

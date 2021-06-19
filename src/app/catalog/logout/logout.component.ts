@@ -8,7 +8,16 @@ export class LogoutComponent{
   constructor(
     private router: Router,
   ) {
-    localStorage.setItem('token','')
-    this.router.navigate(['auth']);
+    if(window.location.href.includes('admin'))
+    {
+      localStorage.setItem('admin.token','')
+      this.router.navigate(['auth_admin']);
+    }
+    else
+    {
+      localStorage.setItem('enduser.token','')
+      this.router.navigate(['auth_enduser']);
+    }
+
   }
 }

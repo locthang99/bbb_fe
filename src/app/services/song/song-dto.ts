@@ -47,10 +47,11 @@ export class CommentCommand extends UserCmtRequest {
 export interface SongDTO
 {
     name: string;
-    thubnail: FileParameter;
+    thumbnail: FileParameter;
     lyric:FileParameter;
     description: string;
     duration: string;
+    country:string;
     isOfficial:string;
     file128:FileParameter;
     file320:FileParameter;
