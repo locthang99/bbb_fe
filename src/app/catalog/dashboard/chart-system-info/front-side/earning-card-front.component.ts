@@ -15,7 +15,7 @@ export class EarningCardFrontComponent implements OnDestroy, OnInit {
   @Input() selectedCurrency: string = 'Bitcoin';
 
   intervalSubscription: Subscription;
-  currencies = [{value:'Bitcoin',title:'CPU'},{ value:'Tether',title:'RAM'}, {value:'Ethereum',title:"DISK"}];
+  currencies = [{value:'Bitcoin',title:'CPU'},{ value:'Tether',title:'RAM'}];
   currentTheme: string;
   earningLiveUpdateCardData: LiveUpdateChart;
   liveUpdateChartData: { value: [string, number] }[];

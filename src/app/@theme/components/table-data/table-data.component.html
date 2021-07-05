@@ -69,7 +69,10 @@
   <mat-row *matRowDef="let row; columns: inputColumns;">
   </mat-row>
 </mat-table>
-<h3 class="text-center" *ngIf="dataSource.data.length === 0">No records found</h3>
+<ng-container *ngIf="dataSource.data.length === 0">
+  <h2 class="text-center mt-5"><nb-icon icon="file-remove-outline"></nb-icon> No data</h2>
+</ng-container>
+
 <mat-paginator [length]="dataSource.totalItem" [pageSize]="dataSource.pageSize" [pageIndex]="dataSource.index"
   [pageSizeOptions]="[5,10,15,20]" (page)="$event; onChangePaginator($event)" showFirstLastButtons>
 </mat-paginator>

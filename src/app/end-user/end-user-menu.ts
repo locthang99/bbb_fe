@@ -1,12 +1,6 @@
 import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
-
-  {
-    title: 'Cá nhân',
-    icon: 'person-outline',
-    link: '/enduser/user',
-  },
   {
     title: 'Dữ liệu',
     icon: 'pie-chart-outline',
@@ -28,6 +22,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Nâp cấp tài khoản',
     icon: 'arrowhead-up-outline',
     link: '/enduser/buyvip',
+  },
+  {
+    title: 'Hóa đơn',
+    icon: 'file-text-outline',
+    link: '/enduser/bill',
+  },
+  {
+    title: 'Cá nhân',
+    icon: 'person-outline',
+    link: '/enduser/user',
   },
   {
   title: '---------------------------------------------------',

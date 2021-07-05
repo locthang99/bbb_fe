@@ -1,4 +1,7 @@
 ﻿import { Component, OnInit } from "@angular/core";
+import {MatDialog,MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {PopupChangePwdComponent} from './popup-change-pwd/popup-change-pwd.component'
+
 @Component({
   templateUrl: "profile.component.html",
   styleUrls: ["./profile.component.scss"],
@@ -9,8 +12,7 @@ export class ProfileComponent implements OnInit {
   error = "";
   user:any;
 
-  constructor(
-  ) {
+  constructor(public popupChangPwd : MatDialog) {
     
     if(window.location.href.includes('admin'))
       this.getProfile('admin')
@@ -35,5 +37,10 @@ export class ProfileComponent implements OnInit {
     }
   }
   ngOnInit() {
+  }
+
+  onPopupChangePwd()
+  {
+    this.popupChangPwd.open(PopupChangePwdComponent)
   }
 }

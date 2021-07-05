@@ -13,6 +13,7 @@ export class ChartTypeComponent implements OnInit {
   chartInstance:any;
   macaronsTheme = MacaronsTheme;
   option = {
+    responsive: true,
     title: {
       text: 'Thông kê loại nhạc',
       subtext: 'Việt Nam',

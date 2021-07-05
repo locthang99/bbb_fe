@@ -2,14 +2,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import {EndUserComponent} from './end-user.component'
-import {DashboardComponent} from 'app/catalog/dashboard/dashboard.commponent'
 import { MyDashboardComponent } from './my-dashboard/my-dashboard.component'
 import { ListMySongComponent } from './list-my-song/list-my-song.component'
 import { CreateSongComponent } from './create-song/create-song.component'
 import {UpdateAccountComponent} from './update-account/update-account.component'
+import {MyBillComponent} from "./my-bill/my-bill.component"
 
 import {ProfileComponent} from '../catalog/profile/profile.component'
 import {LogoutComponent} from '../catalog/logout/logout.component'
+import { DashboardComponent } from 'app/catalog/dashboard/dashboard.commponent';
 
 const routes: Routes = [{
   path: '',
@@ -21,7 +22,7 @@ const routes: Routes = [{
     },
     {
       path: 'dashboard',
-      component: DashboardComponent,
+      component: MyDashboardComponent,
     },
     {
       path: 'song',
@@ -36,18 +37,22 @@ const routes: Routes = [{
       component: UpdateAccountComponent,
     },
     {
+      path: 'bill',
+      component: MyBillComponent,
+    },
+    {
       path: 'logout',
       component: LogoutComponent,
     },
 
     {
       path: '',
-      redirectTo: 'user',
+      redirectTo: 'dashboard',
       pathMatch: 'full',
     },
     {
       path: '**',
-      component: ProfileComponent,
+      component: MyDashboardComponent,
     },
   ],
 }];

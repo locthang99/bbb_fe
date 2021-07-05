@@ -3,7 +3,7 @@ import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { LayoutService } from '../../../../@core/utils';
 import { OutlineData } from '../../../../@core/data/visitors-analytics';
-
+import { DashboardHttpClient } from "app/services/dashboard/dashboard-service";
 @Component({
   selector: 'ngx-visitors-analytics-chart',
   styleUrls: ['./visitors-analytics-chart.component.scss'],
@@ -20,9 +20,9 @@ export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit, 
 
   private alive = true;
 
-  @Input() chartData: {
-    innerLine: number[];
-    outerLine: OutlineData[];
+  chartData = {
+    innerLine: [],
+    outerLine: []
   };
 
   option: any;
@@ -30,7 +30,8 @@ export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit, 
   echartsIntance: any;
 
   constructor(private theme: NbThemeService,
-              private layoutService: LayoutService) {
+              private layoutService: LayoutService,
+              private dbService : DashboardHttpClient) {
     this.layoutService.onSafeChangeLayoutSize()
       .pipe(
         takeWhile(() => this.alive),
@@ -46,13 +47,28 @@ export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit, 
       )
       .subscribe(config => {
         const eTheme: any = config.variables.visitors;
+        this.setDataOuter(eTheme);       
+    });
+  }
 
-        this.setOptions(eTheme);
+  setDataOuter(eTheme)
+  {
+    this.dbService.getAge("monthh").then((res) => {
+      res.data.forEach((item) => {
+        this.chartData.outerLine.push({
+          label: item.title,
+          value: item.value,
+        });
+      });
+      console.log(this.chartData.outerLine);
+      this.setOptions(eTheme);
     });
   }
 
   setOptions(eTheme) {
     this.option = {
+      responsive: true,
+      maintainAspectRatio: false,
       grid: {
         left: 40,
         top: 20,
@@ -115,7 +131,7 @@ export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit, 
           fontSize: eTheme.axisFontSize,
         },
         axisTick: {
-          show: false,
+          show: false,          
         },
         splitLine: {
 
@@ -126,9 +142,26 @@ export class ECommerceVisitorsAnalyticsChartComponent implements AfterViewInit, 
         },
       },
       series: [
-        this.getInnerLine(eTheme),
         this.getOuterLine(eTheme),
       ],
+      scales: {
+        // xAxes: [{
+        //         display: true,
+        //         scaleLabel: {
+        //             display: true,
+        //             labelString: 'Month'
+        //         }
+        //     }],
+        yAxes: [{
+                display: true,
+                ticks: {
+                    beginAtZero: true,
+                    steps: 5,
+                    stepValue: 5,
+                    max: 100
+                }
+            }]
+    },
     };
   }
 

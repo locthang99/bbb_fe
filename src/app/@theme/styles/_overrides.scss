@@ -10,17 +10,24 @@
   }
 }
 .cdk-overlay-container{
+  position: unset;
   overflow-y: unset !important;
 }
 .cdk-global-scrollblock{
+  position: unset !important;
   overflow-y: unset !important;
 }
 
-.nb-theme-default nb-layout.with-scroll .scrollable-container {
-  overflow: unset !important;
-  height: 100vh;
-  display: block;
+.nb-global-scrollblock
+{
+  position: unset;
+  overflow-y: unset !important;
 }
-body{
-  overflow: auto !important;
-}
+// .nb-theme-default nb-layout.with-scroll .scrollable-container {
+//   overflow: unset !important;
+//   height: 100vh;  
+//   display: block;
+// }
+// body{
+//   overflow: auto !important;
+// }

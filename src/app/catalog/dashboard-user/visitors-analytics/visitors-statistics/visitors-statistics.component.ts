@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { delay, takeWhile } from 'rxjs/operators';
 import { LayoutService } from '../../../../@core/utils/layout.service';
-
+import {DashboardHttpClient} from "app/services/dashboard/dashboard-service"
 
 @Component({
   selector: 'ngx-visitors-statistics',
@@ -13,14 +13,16 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
 
   private alive = true;
 
-  @Input() value: number;
-
+  value = 0;
+  value2 = 0;
+  totalUser = 0;
   option: any = {};
   chartLegend: { iconColor: string; title: string }[];
   echartsIntance: any;
 
   constructor(private theme: NbThemeService,
-              private layoutService: LayoutService) {
+              private layoutService: LayoutService,
+              private dbService: DashboardHttpClient) {
     this.layoutService.onSafeChangeLayoutSize()
       .pipe(
         takeWhile(() => this.alive),
@@ -38,20 +40,31 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
         const variables: any = config.variables;
         const visitorsPieLegend: any = config.variables.visitorsPieLegend;
 
-        this.setOptions(variables);
+        this.setData(variables);
         this.setLegendItems(visitorsPieLegend);
+
     });
   }
 
+  setData(variables)
+  {
+    this.dbService.getChartAllUser().then(res=>{
+      this.totalUser = res.data[0].value +res.data[1].value;
+      this.value = res.data[0].value;
+      this.value2 = res.data[1].value;
+      this.setOptions(variables);
+    })
+
+  }
   setLegendItems(visitorsPieLegend) {
     this.chartLegend = [
       {
         iconColor: visitorsPieLegend.firstSection,
-        title: 'New Visitors',
+        title: 'VIP',
       },
       {
         iconColor: visitorsPieLegend.secondSection,
-        title: 'Return Visitors',
+        title: 'Not VIP',
       },
     ];
   }
@@ -68,7 +81,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
         {
           name: ' ',
           clockWise: true,
-          hoverAnimation: false,
+          hoverAnimation: true,
           type: 'pie',
           center: ['50%', '50%'],
           radius: visitorsPie.firstPieRadius,
@@ -89,7 +102,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
                 },
               },
               tooltip: {
-                show: false,
+                show: true,
               },
               itemStyle: {
                 normal: {
@@ -112,10 +125,10 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
               hoverAnimation: false,
             },
             {
-              value: 100 - this.value,
+              value: this.value2,
               name: ' ',
               tooltip: {
-                show: false,
+                show: true,
               },
               label: {
                 normal: {
@@ -164,7 +177,7 @@ export class ECommerceVisitorsStatisticsComponent implements AfterViewInit, OnDe
               hoverAnimation: false,
             },
             {
-              value: 100 - this.value,
+              value: this.value2,
               name: ' ',
               tooltip: {
                 show: false,

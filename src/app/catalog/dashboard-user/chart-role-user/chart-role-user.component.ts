@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DashboardHttpClient} from 'app/services/dashboard/dashboard-service'
-import {CoolTheme} from 'app/@theme/themeColor'
+import {MacaronsTheme} from 'app/@theme/themeColor'
 
 @Component({
   selector: 'ngx-chart-role-user',
@@ -10,10 +10,10 @@ import {CoolTheme} from 'app/@theme/themeColor'
 export class ChartRoleUserComponent implements OnInit {
 
   chartInstance:any;
-  coolTheme = CoolTheme;
+  coolTheme = MacaronsTheme;
   option = {
     title: {
-      text: 'Thông kê loại user',
+      text: 'Thống kê loại user',
       x: 'center'
     },
     textStyle: {

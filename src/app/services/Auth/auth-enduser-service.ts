@@ -59,10 +59,13 @@ export class EnduserHttpClient {
         };
         return this.http.get(url_, options_).toPromise();
     }
-    changePassword(rq: ChangePasswordCommand): Promise<any>  {
+    changePassword(oldPwd:string,newPwd:string): Promise<any>  {
         let url_ = this.baseUrl + "/api/v1/Enduser/ChangePassword";
         url_ = url_.replace(/[?&]$/, "");
-
+        let rq =new ChangePasswordCommand();
+        rq.oldPassword = oldPwd;
+        rq.newPassword= newPwd;
+        rq.confirmNewPassword = newPwd;
         const content_ = JSON.stringify(rq);
 
         let options_ = {
@@ -74,7 +77,7 @@ export class EnduserHttpClient {
             }
         };
 
-        return fetch(url_, options_).then(_response => _response.json())
+        return this.http.request('post',url_, options_).toPromise()
     }
 
     sendCodeResetPassword(rq: SendCodeResetPasswordCommand): Promise<any>  {

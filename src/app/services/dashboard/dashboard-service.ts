@@ -149,4 +149,51 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
                   
             return this.http.get(url_,options_).toPromise();
         }
+
+        getChartReactionMySong(type: string | null | undefined): Promise<any> {
+            let url_ = this.basePrefix + "/ChartRectionMySong?";
+            if (type !== undefined && type !== null)
+                url_ += "Type=" + encodeURIComponent("" + type) + "&";
+            url_ = url_.replace(/[?&]$/, "");
+    
+            let options_ : {
+                observe: "response",
+                responseType: "json",
+                headers: {
+                    "Accept": "application/json"
+                }
+            };
+    
+            return this.http.get(url_,options_).toPromise();
+        }
+
+        getAllInfoMySong(): Promise<any> {
+            let url_ = this.basePrefix + "/GetAllInfoMySong?";
+            url_ = url_.replace(/[?&]$/, "");
+    
+            let options_ : {
+                observe: "response",
+                responseType: "json",
+                headers: {
+                    "Accept": "application/json"
+                }
+            };
+    
+            return this.http.get(url_,options_).toPromise();
+        }
+
+        getChartAllUser(): Promise<any> {
+            let url_ = this.basePrefix + "/GetChartAllUser?";
+            url_ = url_.replace(/[?&]$/, "");
+    
+            let options_ : {
+                observe: "response",
+                responseType: "json",
+                headers: {
+                    "Accept": "application/json"
+                }
+            };
+    
+            return this.http.get(url_,options_).toPromise();
+        }
     }

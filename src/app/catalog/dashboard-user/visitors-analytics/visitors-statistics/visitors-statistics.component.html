@@ -1,6 +1,6 @@
 <div class="visitors-statistics">
-  <h4 class="h1">1,100</h4>
-  <div class="visitors-title">New Visitors</div>
+  <h4 class="h1">{{totalUser}}</h4>
+  <div class="visitors-title">Tổng số người dùng</div>
   <div class="statistics-chart">
     <div echarts
          [options]="option"
@@ -10,8 +10,8 @@
   </div>
   <div class="statistics-footer">
     <div class="chart-values h5">
-      <span class="chart-value">25%</span>
-      <span class="chart-value">75%</span>
+      <span class="chart-value">{{value2}}</span>
+      <span class="chart-value">{{value}}</span>
     </div>
     <ngx-legend-chart class="visitors-statistics-legend" [legendItems]="chartLegend"></ngx-legend-chart>
   </div>

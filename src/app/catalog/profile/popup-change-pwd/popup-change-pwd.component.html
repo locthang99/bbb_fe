@@ -1,0 +1,16 @@
+<!-- <mat-label>Mật khẩu cũ</mat-label>
+<input type="text" fullWidth nbInput [(ngModel)]="song.name" name="name" placeholder="Sóng gió"> -->
+<div style="width: 300px;">
+    <mat-label>Mật khẩu cũ</mat-label>
+    <input type="password" fullWidth nbInput [(ngModel)]="oldPwd" name="oldPwd" placeholder="Nhập mật khẩu cũ...">
+    <mat-label>Mật khẩu mới</mat-label>
+    <input type="password" fullWidth nbInput [(ngModel)]="newPwd" name="newPwd" placeholder="Nhập mật khẩu cũ...">
+    <mat-label>Xác nhận mật khẩu mới</mat-label>
+    <input type="password" fullWidth nbInput [(ngModel)]="confirmNewPwd" name="confirmNewPwd" placeholder="Xác nhận khẩu cũ...">
+    <div class="">Mật khẩu trên 8 kí tự,in hoa,sô,kí tụ đặc biệt</div>
+    <div *ngIf="msgErr!=''" class="text-danger">{{msgErr}}</div>
+    <div *ngIf="msgSuccess!=''" class="text-danger">{{msgSuccess}}</div>
+    <button style="float: right;" mat-raised-button color="primary" (click)="onChangePwd()">Xong</button>
+</div>
+
+

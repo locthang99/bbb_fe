@@ -1,0 +1,22 @@
+<!-- <div class="row container">
+    <div class="col-1"></div>
+
+
+
+
+
+</div> -->
+<div class="row">
+    <li class="col-4" *ngFor="let info of dataSong;let i = index" style="list-style: none;">
+        <ngx-info-song *ngIf="2>=i" [title]="info.title" [type]="types[i]" [value]="info.value">
+            <nb-icon [icon]="icons[i]"></nb-icon>
+          </ngx-info-song>
+    </li>
+</div>
+<div class="row">
+    <li class="col-4" *ngFor="let info of dataSong;let i = index" style="list-style: none;">
+        <ngx-info-song *ngIf="i>=3" [title]="info.title" [type]="types[i]" [value]="info.value">
+            <nb-icon [icon]="icons[i]"></nb-icon>
+          </ngx-info-song>
+    </li>
+</div>

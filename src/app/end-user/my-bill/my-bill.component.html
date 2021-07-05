@@ -1,0 +1,65 @@
+
+
+<nb-card>
+    <nb-card-body>
+      <mat-tab-group mat-align-tabs="end">
+        <mat-tab label="Hóa đơn thanh toán">
+            <div class="example-loading-shade" *ngIf="isLoading">
+                <mat-spinner *ngIf="isLoading"></mat-spinner>
+              </div>
+              
+              <mat-table #table [dataSource]="dataSource.data" class="mat-elevation-z8" matSort matSortActive="id" matSortDisableClear
+                matSortDirection="desc">
+              
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef class="col-max-w-30" mat-sort-header disableClear> Mã hóa đơn </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="col-max-w-30"> {{row.name}} </mat-cell>
+                </ng-container>
+              
+                <ng-container matColumnDef="itemName">
+                  <mat-header-cell *matHeaderCellDef class="col-max-w-12"> Tên gói </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="col-max-w-12"> {{row.itemName}} </mat-cell>
+                </ng-container>
+              
+                <ng-container matColumnDef="amount">
+                  <mat-header-cell *matHeaderCellDef class="col-max-w-12" mat-sort-header disableClear> Giá </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="col-max-w-12"> {{row.amount}} </mat-cell>
+                </ng-container>
+              
+                <ng-container matColumnDef="discountAdded">
+                  <mat-header-cell *matHeaderCellDef class="col-max-w-10"> Khuyến mãi </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="col-max-w-10"> {{row.discountAdded}}% </mat-cell>
+                </ng-container>
+              
+              
+                <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef class="col-max-w-10" mat-sort-header disableClear> Trạng thái</mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="col-max-w-10"> {{row.status}} </mat-cell>
+                </ng-container>
+              
+                <ng-container matColumnDef="dateCreate">
+                  <mat-header-cell *matHeaderCellDef class="col-max-w-20" mat-sort-header disableClear> {{lang.table.dateCreate}}</mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="col-max-w-20"> {{row.dateCreate.slice(0,19).replace("T","--")}} </mat-cell>
+                </ng-container>
+              
+                <ng-container matColumnDef="action">
+                  <mat-header-cell *matHeaderCellDef class="col-max-w-10"> {{lang.table.action}} </mat-header-cell>
+                  <mat-cell class="text-center" *matCellDef="let row" class="col-max-w-10">
+                    <mat-icon style="cursor: pointer;" aria-hidden="false" aria-label="Edit" (click)="onClickRow.emit(row.id)">edit_note</mat-icon>
+                    <div></div> 
+                  </mat-cell>
+                </ng-container>
+              
+                <mat-header-row *matHeaderRowDef="inputColumns">
+                </mat-header-row>
+                <mat-row *matRowDef="let row; columns: inputColumns;">
+                </mat-row>
+              </mat-table>
+              <h3 class="text-center" *ngIf="dataSource.data.length === 0">No records found</h3>
+              <mat-paginator [length]="dataSource.totalItem" [pageSize]="dataSource.pageSize" [pageIndex]="dataSource.index"
+                [pageSizeOptions]="[5,10,15,20]" (page)="$event; onChangePaginator($event)" showFirstLastButtons>
+              </mat-paginator>
+        </mat-tab>
+      </mat-tab-group>
+    </nb-card-body>
+  </nb-card>

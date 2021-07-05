@@ -11,6 +11,7 @@ export class ChartReactionSongComponent implements OnInit {
   isLoading = true;
   echartsIntance: any;
   options = {
+    responsive: true,
     title:{text:" Thống kê tương tác bài hát"},
     textStyle: {
       fontFamily:'"Helvetica Neue", sans-serif',

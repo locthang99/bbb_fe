@@ -14,14 +14,14 @@ export class EarningCardBackComponent implements OnDestroy {
   name: string;
   color: string;
   value: number;
-  defaultSelectedCurrency: string = 'CPU';
+  defaultSelectedCurrency: string = 'Đã dùng';
 
   constructor(private earningService: EarningData ) {
     this.earningService.getEarningPieChartData()
       .pipe(takeWhile(() => this.alive))
       .subscribe((earningPieChartData) => {
         //this.earningPieChartData = earningPieChartData;
-        this.earningPieChartData = [{name:"CPU",value:50},{name:"RAM",value:30},{name:"DISK",value:20}];
+        this.earningPieChartData = [{name:"Đã dùng",value:81},{name:"Còn lại",value:19},{name:"",value:0}];
       });
   }
 

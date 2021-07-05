@@ -38,6 +38,8 @@ import { PredictModelComponent } from './deeplearning/predict-model/predict-mode
 import { DetailPredictTypeComponent } from './deeplearning/predict-model/detail-predict-type/detail-predict-type.component';
 import { ListImageMfccComponent } from './deeplearning/predict-model/list-image-mfcc/list-image-mfcc.component';
 
+import {ProfileComponent} from './profile/profile.component'
+
 import { ListAccountComponent } from './account/list-account/list-account.component';
 import { DetailAccountComponent } from './account/detail-account/detail-account.component'
 
@@ -49,6 +51,7 @@ import {MaterialModule} from '../material-module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NbCardModule,NbSelectModule,NbToggleModule,NbIconModule,NbListModule,NbButtonModule,NbInputModule} from '@nebular/theme';
+import { PopupChangePwdComponent } from './profile/popup-change-pwd/popup-change-pwd.component';
 
 
 
@@ -98,7 +101,9 @@ const COMPONENTS =[
     SlideOutComponent,
 
     ListAccountComponent,
-    DetailAccountComponent
+    DetailAccountComponent,
+    ProfileComponent,
+    PopupChangePwdComponent
 
 ]
 @NgModule({

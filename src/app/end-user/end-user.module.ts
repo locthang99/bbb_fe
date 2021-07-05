@@ -13,7 +13,10 @@ import { NbCardModule,NbSelectModule,NbToggleModule,NbIconModule,NbListModule,Nb
 import { UpdateAccountComponent } from './update-account/update-account.component';
 import { ListMySongComponent } from './list-my-song/list-my-song.component';
 import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
-
+import { MyBillComponent } from './my-bill/my-bill.component';
+import { ChartReactionMySongComponent } from './my-dashboard/chart-reaction-my-song/chart-reaction-my-song.component';
+import { TotalInfoSongComponent } from './my-dashboard/total-info-song/total-info-song.component';
+import {InfoSongComponent} from './my-dashboard/total-info-song/info-song/info-song.component'
 
 
 const MODULE_IMPORTS =[
@@ -27,6 +30,10 @@ const COMPONENTS =[
     UpdateAccountComponent,
     ListMySongComponent,
     MyDashboardComponent,
+    MyBillComponent,
+    ChartReactionMySongComponent,
+    TotalInfoSongComponent,
+    InfoSongComponent
 ]
 @NgModule({
   imports: [...MODULE_IMPORTS],
